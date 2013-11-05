@@ -38,6 +38,9 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -53,11 +56,22 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Comman\BaseInformationFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Comman\GoalFactoryFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NutritionCal.Common\NutritionCal.Common.csproj">
+      <Project>{b43064df-c15d-4d63-b892-843c12974cff}</Project>
+      <Name>NutritionCal.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NutritionCal.GUI\NutritionCal.GUI.csproj">
+      <Project>{0a7162d9-5451-4c88-95fc-c23f92cc9835}</Project>
+      <Name>NutritionCal.GUI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
