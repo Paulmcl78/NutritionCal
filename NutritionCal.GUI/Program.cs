@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Castle.Windsor;
+using NutritionCal.Common;
+using NutritionCal.Common.IOC;
+using NutritionCal.GUI.Forms;
+using NutritionCal.GUI.IOC;
 
 namespace NutritionCal.GUI
 {
@@ -14,9 +16,15 @@ namespace NutritionCal.GUI
         [STAThread]
         static void Main()
         {
+            WindsorContainer container = BootStrapper.Instance.BootstrapIoc();
+            container.Install(new GUIWindsorInstaller(),new CommonWindsorInstaller());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            Form1 mainForm = container.Resolve<Form1>();
+            Application.Run(mainForm);
+            
+
         }
     }
 }
