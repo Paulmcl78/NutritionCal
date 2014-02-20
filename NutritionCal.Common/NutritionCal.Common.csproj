@@ -60,6 +60,7 @@
     <Compile Include="Implementation\GoalLoseWeightObese.cs" />
     <Compile Include="Implementation\GoalMaintainWeight.cs" />
     <Compile Include="Implementation\GoalTypeFactory.cs" />
+    <Compile Include="IOC\CastleContainer.cs" />
     <Compile Include="IOC\CommonWindsorInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

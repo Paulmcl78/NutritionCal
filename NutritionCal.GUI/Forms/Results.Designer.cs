@@ -1,6 +1,6 @@
 ﻿namespace NutritionCal.GUI.Forms
 {
-    partial class frmResults
+    partial class FrmResults
     {
         /// <summary>
         /// Required designer variable.
@@ -175,7 +175,7 @@
             this.Controls.Add(this.txtCalories);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "frmResults";
+            this.Name = "FrmResults";
             this.Text = "Results";
             this.Load += new System.EventHandler(this.Results_Load);
             this.ResumeLayout(false);

@@ -10,8 +10,10 @@ namespace NutritionCal.Common.IOC
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IBaseInformation>().ImplementedBy<BaseInformation>().LifeStyle.Transient);
-            container.Register(Component.For<IGoalTypeFactory>().ImplementedBy<GoalTypeFactory>());
+            container.Register(Component.For<IBaseInformation>().ImplementedBy<BaseInformation>().LifeStyle.Singleton);
+            container.Register(Component.For<IGoalTypeFactory>().ImplementedBy<GoalTypeFactory>().LifeStyle.Singleton);
+            container.Register(Component.For<IFoodStats>().ImplementedBy<FoodStats>().LifeStyle.Singleton);
+            container.Register(Component.For<FrmResults>())
         }
     }
 }

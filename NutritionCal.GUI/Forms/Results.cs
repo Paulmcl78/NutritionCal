@@ -1,30 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using System.Xml.Serialization;
 using NutritionCal.Common.Abstraction;
-using NutritionCal.Common.Implementation;
 
 namespace NutritionCal.GUI.Forms
 {
-    public partial class frmResults : Form
+    public partial class FrmResults : Form
     {
         private readonly IBaseInformation _baseInformation;
+        private IFoodStats _foodStats;
 
-        public frmResults(IBaseInformation baseInformation)
+        public FrmResults(IBaseInformation baseInformation)
         {
             InitializeComponent();
             _baseInformation = baseInformation;
         }
+
+        #region properties
+        public IFoodStats FoodStats
+        {
+            get { return _foodStats; }
+            set { _foodStats = value; }
+        }
+
+        #endregion
+
 
         private void Results_Load(object sender, EventArgs e)
         {
@@ -41,14 +42,10 @@ namespace NutritionCal.GUI.Forms
 
         private void test()
         {
-            IFoodStats foodStats = new FoodStats();
 
-            foodStats.AddFood("test",1,1,1,1,1);
+            FoodStats.AddFood("test", 1, 1, 1, 1, 1);
 
-            txtCalories.Text = foodStats.Foods.First(x => x.Name == "test").Name;
-
-            foodStats.SaveChanges();
- 
+            txtCalories.Text = FoodStats.Foods.First(x => x.Name == "test").Name;
 
 
         }

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using NutritionCal.Common;
 using NutritionCal.Common.Abstraction;
+using NutritionCal.Common.IOC;
 
 namespace NutritionCal.GUI.Forms
 {
@@ -43,7 +44,8 @@ namespace NutritionCal.GUI.Forms
 
             _baseInformation.Calculate(_goalTypeFactory.GetGoalType(goalType));
 
-            frmResults results = new frmResults(_baseInformation);
+
+            FrmResults results = CastleContainer.Resolve<FrmResults>();
             results.Show();
             //this.Hide();
         }
