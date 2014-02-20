@@ -4,11 +4,15 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using NutritionCal.Common.Abstraction;
+using NutritionCal.Common.Implementation;
 
 namespace NutritionCal.GUI.Forms
 {
@@ -31,6 +35,21 @@ namespace NutritionCal.GUI.Forms
             txtFatPercent.Text = Math.Round(_baseInformation.FatsPercentage,2).ToString(CultureInfo.InvariantCulture);
             txtProtein.Text = _baseInformation.Protein.ToString(CultureInfo.InvariantCulture);
             txtProteinPercent.Text = Math.Round(_baseInformation.ProteinPercentage,2).ToString(CultureInfo.InvariantCulture);
+
+            test();
+        }
+
+        private void test()
+        {
+            IFoodStats foodStats = new FoodStats();
+
+            foodStats.AddFood("test",1,1,1,1,1);
+
+            txtCalories.Text = foodStats.Foods.First(x => x.Name == "test").Name;
+
+            foodStats.SaveChanges();
+ 
+
 
         }
 

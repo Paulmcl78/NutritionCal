@@ -160,7 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 472);
+            this.ClientSize = new System.Drawing.Size(657, 488);
             this.Controls.Add(this.txtFatPercent);
             this.Controls.Add(this.txtCarbPercent);
             this.Controls.Add(this.txtProteinPercent);

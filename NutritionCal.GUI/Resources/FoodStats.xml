@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FoodStats>
+  <Food>
+    <Name>Alpro Almond Milk Original</Name>
+    <Measure>100</Measure>
+    <Protein>0.5</Protein>
+    <Carbs>3</Carbs>
+    <Fat>1.1</Fat>
+    <Calories>24</Calories>
+  </Food>
+</FoodStats>
