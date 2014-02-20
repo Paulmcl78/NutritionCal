@@ -39,9 +39,10 @@
             // 
             // cmdSubmit
             // 
-            this.cmdSubmit.Location = new System.Drawing.Point(81, 157);
+            this.cmdSubmit.Location = new System.Drawing.Point(123, 195);
+            this.cmdSubmit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmdSubmit.Name = "cmdSubmit";
-            this.cmdSubmit.Size = new System.Drawing.Size(75, 23);
+            this.cmdSubmit.Size = new System.Drawing.Size(100, 28);
             this.cmdSubmit.TabIndex = 0;
             this.cmdSubmit.Text = "submit";
             this.cmdSubmit.UseVisualStyleBackColor = true;
@@ -49,26 +50,29 @@
             // 
             // txtWeight
             // 
-            this.txtWeight.Location = new System.Drawing.Point(113, 123);
+            this.txtWeight.Location = new System.Drawing.Point(151, 151);
+            this.txtWeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtWeight.Name = "txtWeight";
-            this.txtWeight.Size = new System.Drawing.Size(100, 20);
+            this.txtWeight.Size = new System.Drawing.Size(132, 22);
             this.txtWeight.TabIndex = 1;
             // 
             // lblWeight
             // 
             this.lblWeight.AutoSize = true;
-            this.lblWeight.Location = new System.Drawing.Point(12, 126);
+            this.lblWeight.Location = new System.Drawing.Point(16, 155);
+            this.lblWeight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWeight.Name = "lblWeight";
-            this.lblWeight.Size = new System.Drawing.Size(95, 13);
+            this.lblWeight.Size = new System.Drawing.Size(126, 17);
             this.lblWeight.TabIndex = 2;
             this.lblWeight.Text = "Enter weight in lb\'s";
             // 
             // rbGain
             // 
             this.rbGain.AutoSize = true;
-            this.rbGain.Location = new System.Drawing.Point(82, 12);
+            this.rbGain.Location = new System.Drawing.Point(109, 15);
+            this.rbGain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbGain.Name = "rbGain";
-            this.rbGain.Size = new System.Drawing.Size(81, 17);
+            this.rbGain.Size = new System.Drawing.Size(103, 21);
             this.rbGain.TabIndex = 3;
             this.rbGain.Text = "Gain weight";
             this.rbGain.UseVisualStyleBackColor = true;
@@ -76,9 +80,10 @@
             // rbLose
             // 
             this.rbLose.AutoSize = true;
-            this.rbLose.Location = new System.Drawing.Point(82, 35);
+            this.rbLose.Location = new System.Drawing.Point(109, 43);
+            this.rbLose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbLose.Name = "rbLose";
-            this.rbLose.Size = new System.Drawing.Size(82, 17);
+            this.rbLose.Size = new System.Drawing.Size(104, 21);
             this.rbLose.TabIndex = 4;
             this.rbLose.Text = "Lose weight";
             this.rbLose.UseVisualStyleBackColor = true;
@@ -86,9 +91,10 @@
             // rbLose25
             // 
             this.rbLose25.AutoSize = true;
-            this.rbLose25.Location = new System.Drawing.Point(82, 59);
+            this.rbLose25.Location = new System.Drawing.Point(109, 73);
+            this.rbLose25.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbLose25.Name = "rbLose25";
-            this.rbLose25.Size = new System.Drawing.Size(130, 17);
+            this.rbLose25.Size = new System.Drawing.Size(169, 21);
             this.rbLose25.TabIndex = 5;
             this.rbLose25.Text = "Lose weight + 25% BF";
             this.rbLose25.UseVisualStyleBackColor = true;
@@ -97,9 +103,10 @@
             // 
             this.rbMaintain.AutoSize = true;
             this.rbMaintain.Checked = true;
-            this.rbMaintain.Location = new System.Drawing.Point(82, 83);
+            this.rbMaintain.Location = new System.Drawing.Point(109, 102);
+            this.rbMaintain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbMaintain.Name = "rbMaintain";
-            this.rbMaintain.Size = new System.Drawing.Size(99, 17);
+            this.rbMaintain.Size = new System.Drawing.Size(126, 21);
             this.rbMaintain.TabIndex = 6;
             this.rbMaintain.TabStop = true;
             this.rbMaintain.Text = "Maintain weight";
@@ -107,9 +114,10 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 233);
+            this.ClientSize = new System.Drawing.Size(365, 287);
+            this.ControlBox = false;
             this.Controls.Add(this.rbMaintain);
             this.Controls.Add(this.rbLose25);
             this.Controls.Add(this.rbLose);
@@ -117,8 +125,11 @@
             this.Controls.Add(this.lblWeight);
             this.Controls.Add(this.txtWeight);
             this.Controls.Add(this.cmdSubmit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Nutrition Cal - Set Weight";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

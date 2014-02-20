@@ -50,6 +50,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AddFood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddFood.Designer.cs">
+      <DependentUpon>AddFood.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddMeal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddMeal.Designer.cs">
+      <DependentUpon>AddMeal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EditFood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditFood.Designer.cs">
+      <DependentUpon>EditFood.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +83,15 @@
     <Compile Include="IOC\GUIWindsorInstaller.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AddFood.resx">
+      <DependentUpon>AddFood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddMeal.resx">
+      <DependentUpon>AddMeal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditFood.resx">
+      <DependentUpon>EditFood.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,6 +108,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\NutritionCal.Common.Abstraction.IFood.datasource" />
+    <None Include="Properties\DataSources\NutritionCal.Common.Abstraction.IMealItem.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

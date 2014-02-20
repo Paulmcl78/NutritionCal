@@ -11,6 +11,9 @@ namespace NutritionCal.Common.Abstraction
         IEnumerable<IFood> Foods { get; set; }
 
         void AddFood(string name, decimal measure, decimal protein, decimal carbs, decimal fat, decimal calories);
+
+        bool foodExists(string name);
+        
         void SaveChanges();
     }
 }

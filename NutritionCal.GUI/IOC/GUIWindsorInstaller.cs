@@ -9,7 +9,11 @@ namespace NutritionCal.GUI.IOC
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<Form1>());
+            container.Register(Component.For<Form1>().LifeStyle.Singleton);
+            container.Register(Component.For<FrmResults>().LifeStyle.Transient);
+            container.Register(Component.For<AddFood>().LifeStyle.Transient);
+            container.Register(Component.For<EditFood>().LifeStyle.Transient);
+            container.Register(Component.For<AddMeal>().LifeStyle.Transient);
         }
     }
 }

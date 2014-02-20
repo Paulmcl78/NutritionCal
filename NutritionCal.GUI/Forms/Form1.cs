@@ -47,7 +47,7 @@ namespace NutritionCal.GUI.Forms
 
             FrmResults results = CastleContainer.Resolve<FrmResults>();
             results.Show();
-            //this.Hide();
+            this.Hide();
         }
 
 

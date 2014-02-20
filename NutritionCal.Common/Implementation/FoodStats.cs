@@ -36,6 +36,8 @@ namespace NutritionCal.Common.Implementation
         }
 
         public IEnumerable<IFood> Foods { get; set; }
+        
+        
         public void AddFood(string name, decimal measure, decimal protein, decimal carbs, decimal fat, decimal calories)
         {
             Foods = Foods.Concat(new[]
@@ -77,6 +79,12 @@ namespace NutritionCal.Common.Implementation
             XDocument xDoc = new XDocument();
             xDoc.Add(allFoods);
             xDoc.Save(filename);
+        }
+
+
+        public bool foodExists(string name)
+        {
+            return Foods.Any(x => x.Name.ToLower() == name.ToLower());
         }
     }
 }

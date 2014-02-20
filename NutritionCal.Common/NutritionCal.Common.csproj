@@ -50,6 +50,8 @@
     <Compile Include="Abstraction\IFoodStats.cs" />
     <Compile Include="Abstraction\IGoalType.cs" />
     <Compile Include="Abstraction\IGoalTypeFactory.cs" />
+    <Compile Include="Abstraction\IMeal.cs" />
+    <Compile Include="Abstraction\IMealItem.cs" />
     <Compile Include="BootStrapper.cs" />
     <Compile Include="GoalTypeEnum.cs" />
     <Compile Include="Implementation\BaseInformation.cs" />
@@ -60,6 +62,8 @@
     <Compile Include="Implementation\GoalLoseWeightObese.cs" />
     <Compile Include="Implementation\GoalMaintainWeight.cs" />
     <Compile Include="Implementation\GoalTypeFactory.cs" />
+    <Compile Include="Implementation\Meal.cs" />
+    <Compile Include="Implementation\MealItem.cs" />
     <Compile Include="IOC\CastleContainer.cs" />
     <Compile Include="IOC\CommonWindsorInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

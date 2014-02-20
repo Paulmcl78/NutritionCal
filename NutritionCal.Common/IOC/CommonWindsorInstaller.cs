@@ -13,7 +13,6 @@ namespace NutritionCal.Common.IOC
             container.Register(Component.For<IBaseInformation>().ImplementedBy<BaseInformation>().LifeStyle.Singleton);
             container.Register(Component.For<IGoalTypeFactory>().ImplementedBy<GoalTypeFactory>().LifeStyle.Singleton);
             container.Register(Component.For<IFoodStats>().ImplementedBy<FoodStats>().LifeStyle.Singleton);
-            container.Register(Component.For<FrmResults>())
         }
     }
 }
