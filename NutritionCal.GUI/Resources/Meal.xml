@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Meals>
+  <Meal name="Test">
+    <MealItem>
+      <FoodName>Alpro Almond Milk Original</FoodName>
+      <Measure>12</Measure>
+      <Protein>0.65</Protein>
+      <Carbs>1.2</Carbs>
+      <Fat>1</Fat>
+      <Calories>45</Calories>
+      <CalCalories>65</CalCalories>
+    </MealItem>
+    <MealItem>
+      <FoodName>Test</FoodName>
+      <Measure>1</Measure>
+      <Protein>1</Protein>
+      <Carbs>1</Carbs>
+      <Fat>1</Fat>
+      <Calories>112</Calories>
+      <CalCalories>100</CalCalories>
+    </MealItem>
+  </Meal>
+</Meals>

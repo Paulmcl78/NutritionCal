@@ -8,4 +8,12 @@
     <Fat>1.1</Fat>
     <Calories>24</Calories>
   </Food>
+  <Food>
+    <Name>Test</Name>
+    <Measure>100</Measure>
+    <Protein>0.5</Protein>
+    <Carbs>3</Carbs>
+    <Fat>1.1</Fat>
+    <Calories>24</Calories>
+  </Food>
 </FoodStats>

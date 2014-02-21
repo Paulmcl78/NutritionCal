@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\IAllMeals.cs" />
     <Compile Include="Abstraction\IBaseInformation.cs" />
     <Compile Include="Abstraction\IFood.cs" />
     <Compile Include="Abstraction\IFoodStats.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Abstraction\IMealItem.cs" />
     <Compile Include="BootStrapper.cs" />
     <Compile Include="GoalTypeEnum.cs" />
+    <Compile Include="Implementation\AllMeals.cs" />
     <Compile Include="Implementation\BaseInformation.cs" />
     <Compile Include="Implementation\Food.cs" />
     <Compile Include="Implementation\FoodStats.cs" />

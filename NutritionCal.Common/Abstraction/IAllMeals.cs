@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace NutritionCal.Common.Abstraction
 {
-    public interface IMeal
+    public interface IAllMeals
     {
-        string MealName { get; set; }
-        IEnumerable<IMealItem> mealitems { get; set; }
+        IEnumerable<IMeal> meals { get; set; }
 
-        void AddFood(IMealItem mealItem);
+        void AddMeal(IMeal meal);
 
-        
+        void SaveChanged();
     }
 }
