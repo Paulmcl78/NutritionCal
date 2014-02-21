@@ -103,7 +103,13 @@ namespace NutritionCal.GUI.Forms
         {
             _meal.MealName = txtName.Text;
             _AllMeals.AddMeal(_meal);
+            _AllMeals.SaveChanged();
             this.Close();
+        }
+
+        private void iMealItemBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

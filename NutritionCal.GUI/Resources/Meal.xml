@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Meals>
   <Meal name="Test">
     <MealItem>
@@ -10,14 +10,25 @@
       <Calories>45</Calories>
       <CalCalories>65</CalCalories>
     </MealItem>
+  </Meal>
+  <Meal name="test2">
+    <MealItem>
+      <FoodName>Alpro Almond Milk Original</FoodName>
+      <Measure>12</Measure>
+      <Protein>0.060</Protein>
+      <Carbs>0.36</Carbs>
+      <Fat>0.132</Fat>
+      <Calories>2.88</Calories>
+      <CalCalories>2.868</CalCalories>
+    </MealItem>
     <MealItem>
       <FoodName>Test</FoodName>
-      <Measure>1</Measure>
-      <Protein>1</Protein>
-      <Carbs>1</Carbs>
-      <Fat>1</Fat>
-      <Calories>112</Calories>
-      <CalCalories>100</CalCalories>
+      <Measure>132</Measure>
+      <Protein>0.660</Protein>
+      <Carbs>3.96</Carbs>
+      <Fat>1.452</Fat>
+      <Calories>31.68</Calories>
+      <CalCalories>31.548</CalCalories>
     </MealItem>
   </Meal>
 </Meals>

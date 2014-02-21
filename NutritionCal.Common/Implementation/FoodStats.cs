@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using NutritionCal.Common.Abstraction;
@@ -59,21 +60,21 @@ namespace NutritionCal.Common.Implementation
 
             XElement allFoods = new XElement("FoodStats");
 
-            int count = 0;
+           
             foreach (var food in Foods)
             {
 
                 XElement name = new XElement("Name") {Value = food.Name};
-               XElement measure = new XElement("Measure") {Value = food.Measure.ToString()};
-                XElement protein = new XElement("Protein") {Value = food.Protein.ToString()};
-               XElement carbs = new XElement("Carbs") { Value = food.Carbs.ToString() };
-               XElement fat = new XElement("Fat") { Value = food.Fat.ToString() };
-               XElement calories = new XElement("Calories") { Value = food.Calories.ToString() };
+                XElement measure = new XElement("Measure") { Value = food.Measure.ToString(CultureInfo.InvariantCulture) };
+                XElement protein = new XElement("Protein") { Value = food.Protein.ToString(CultureInfo.InvariantCulture) };
+                XElement carbs = new XElement("Carbs") { Value = food.Carbs.ToString(CultureInfo.InvariantCulture) };
+                XElement fat = new XElement("Fat") { Value = food.Fat.ToString(CultureInfo.InvariantCulture) };
+                XElement calories = new XElement("Calories") { Value = food.Calories.ToString(CultureInfo.InvariantCulture) };
 
                XElement foodElement = new XElement("Food",name,measure,protein,carbs,fat,calories);
 
                 allFoods.Add(foodElement);
-                count ++;
+
             }
  
             XDocument xDoc = new XDocument();

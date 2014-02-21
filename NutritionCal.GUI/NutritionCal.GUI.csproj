@@ -130,7 +130,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\FoodStats.xml" />
+    <Content Include="Resources\FoodStats.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Resources\Meal.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

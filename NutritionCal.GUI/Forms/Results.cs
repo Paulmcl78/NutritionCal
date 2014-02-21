@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using NutritionCal.Common.Abstraction;
 using NutritionCal.Common.IOC;
+using NutritionCal.Common.Implementation;
 
 namespace NutritionCal.GUI.Forms
 {
@@ -11,63 +15,167 @@ namespace NutritionCal.GUI.Forms
     {
         private readonly IBaseInformation _baseInformation;
         private readonly IFoodStats _foodStats;
-
-        public FrmResults(IBaseInformation baseInformation, IFoodStats foodstats)
+        private readonly IAllMeals _allMeals;
+        private DataTable _dataTable;
+        private IEnumerable<IMealItem> _totalMeals;
+        
+        public FrmResults(IBaseInformation baseInformation, IFoodStats foodstats, IAllMeals allMeals)
         {
             InitializeComponent();
             _baseInformation = baseInformation;
             _foodStats = foodstats;
+            _allMeals = allMeals;
+            _totalMeals = Enumerable.Empty<IMealItem>();
         }
 
          private void Results_Load(object sender, EventArgs e)
         {
 
-            
-            buildTable();
-
-            tlpFinal.Controls.Add(tlpResults, 0, 0);
-            
-           
+             _dataTable = new DataTable("Results Table");
+             BuildHeader();
+             buildMeals();
+             AddBlank();
+             BuildTotal();
+             buildTraget();
+             dataGridView2.DataSource = _dataTable;
+             styleTable();
         }
 
-        private void buildTable()
+        private void BuildTotal()
+        {
+            try
+            {
+                decimal protein = 0;
+                decimal carbs = 0;
+                decimal fats = 0;
+                decimal calories = 0;
+                decimal calCalories = 0;
+                foreach (IMealItem mealItem in _totalMeals)
+                {
+                    protein = protein + mealItem.Protein;
+                    carbs = carbs + mealItem.Carbs;
+                    fats = fats + mealItem.Fat;
+                    calories = calories + mealItem.Calories;
+                    calCalories = calCalories + mealItem.CalCalories;
+                }
+
+                _dataTable.Rows.Add("Total",
+                        protein.ToString(CultureInfo.InvariantCulture),
+                        carbs.ToString(CultureInfo.InvariantCulture),
+                        fats.ToString(CultureInfo.InvariantCulture),
+                        calories.ToString(CultureInfo.InvariantCulture),
+                        calCalories.ToString(CultureInfo.InvariantCulture)
+                        );
+                
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+        }
+
+        private void styleTable()
+        {
+            int counter = 0;
+
+            int finalRow = dataGridView2.Rows.Count;
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                if ((counter == finalRow - 1) || (counter == finalRow -2))
+                {
+                    row.DefaultCellStyle.Font = new Font(dataGridView2.Font, FontStyle.Bold);
+                    row.DefaultCellStyle.BackColor = Color.DimGray;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = counter%2 == 0 ? Color.LemonChiffon : Color.LightGray;
+                }
+
+                counter++;
+            }
+
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+         private void BuildHeader()
+        {
+            _dataTable.Columns.Add("Meal");
+            _dataTable.Columns.Add("Protein");
+            _dataTable.Columns.Add("Carbs");
+            _dataTable.Columns.Add("Fats");
+            _dataTable.Columns.Add("Calories");
+            _dataTable.Columns.Add("Calculated Calories");
+
+        }
+
+         private void buildTraget()
          {
-             tlpResults.Controls.Add(BuildLabel("Protein"), 1, 0);
-             tlpResults.Controls.Add(BuildLabel("Carbs"), 2, 0);
-             tlpResults.Controls.Add(BuildLabel("Fats"), 3, 0);
-             tlpResults.Controls.Add(BuildLabel("Calories"), 4, 0);
 
-             tlpResults.Controls.Add(BuildLabel("Values"), 0, 1);
-             tlpResults.Controls.Add(BuildLabel(_baseInformation.Protein.ToString(CultureInfo.InvariantCulture)), 1, 1);
-             tlpResults.Controls.Add(BuildLabel(_baseInformation.Carbohydrates.ToString(CultureInfo.InvariantCulture)), 2, 1);
-             tlpResults.Controls.Add(BuildLabel(_baseInformation.Fats.ToString(CultureInfo.InvariantCulture)), 3, 1);
-             tlpResults.Controls.Add(BuildLabel(_baseInformation.Calories.ToString(CultureInfo.InvariantCulture)), 4, 1);
-
-             tlpResults.Controls.Add(BuildLabel("Percentages"), 0, 2);
-             tlpResults.Controls.Add(BuildLabel(string.Format("{0}%",Math.Round(_baseInformation.ProteinPercentage, 2).ToString(CultureInfo.InvariantCulture))), 1, 2);
-             tlpResults.Controls.Add(BuildLabel(string.Format("{0}%",Math.Round(_baseInformation.CarbohydratesPercentage, 2).ToString(CultureInfo.InvariantCulture))), 2, 2);
-             tlpResults.Controls.Add(BuildLabel(string.Format("{0}%",Math.Round(_baseInformation.FatsPercentage, 2).ToString(CultureInfo.InvariantCulture))), 3, 2);
-             tlpResults.Controls.Add(BuildLabel(string.Format("{0}%",Math.Round(_baseInformation.CarbohydratesPercentage, 2).ToString(CultureInfo.InvariantCulture))), 4, 2);
+             _dataTable.Rows.Add("Target",
+                                 _baseInformation.Protein.ToString(CultureInfo.InvariantCulture),
+                                 _baseInformation.Carbohydrates.ToString(CultureInfo.InvariantCulture),
+                                 _baseInformation.Fats.ToString(CultureInfo.InvariantCulture),
+                                 _baseInformation.Calories.ToString(CultureInfo.InvariantCulture),
+                                 _baseInformation.Calories.ToString(CultureInfo.InvariantCulture)
+                 );
 
 
-
-
-
-
+             _dataTable.Rows.Add("Target %",
+                            string.Format("{0}%", Math.Round(_baseInformation.ProteinPercentage, 2).ToString(CultureInfo.InvariantCulture)),
+                            string.Format("{0}%", Math.Round(_baseInformation.CarbohydratesPercentage, 2).ToString(CultureInfo.InvariantCulture)),
+                            string.Format("{0}%", Math.Round(_baseInformation.FatsPercentage, 2).ToString(CultureInfo.InvariantCulture)),
+                            "",
+                            ""
+                 );
 
          }
 
-        private Label BuildLabel(string text)
+        private void AddBlank()
         {
-            Label label = new Label();
-            label.Dock = DockStyle.Fill;
-            label.Text = text;
-            label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
-            return label;
+            _dataTable.Rows.Add();
         }
 
-       
+        private void buildMeals()
+        {
+
+            try
+            {
+                foreach (IMeal meal in _allMeals.meals)
+                {
+                    IMealItem toalItem = new MealItem();
+                   foreach (IMealItem mealItem in meal.mealitems)
+                    {
+
+
+                        toalItem.Protein = toalItem.Protein + mealItem.Protein;
+                        toalItem.Carbs = toalItem.Carbs + mealItem.Carbs;
+                        toalItem.Fat = toalItem.Fat + mealItem.Fat;
+                        toalItem.Calories = toalItem.Calories + mealItem.Calories;
+                        toalItem.CalCalories = toalItem.CalCalories + mealItem.CalCalories;
+                    }
+
+
+                    _dataTable.Rows.Add(meal.MealName,
+                        toalItem.Protein.ToString(CultureInfo.InvariantCulture),
+                        toalItem.Carbs.ToString(CultureInfo.InvariantCulture),
+                        toalItem.Fat.ToString(CultureInfo.InvariantCulture),
+                        toalItem.Calories.ToString(CultureInfo.InvariantCulture),
+                        toalItem.CalCalories.ToString(CultureInfo.InvariantCulture)
+                        );
+
+                    _totalMeals = _totalMeals.Concat(new[]{ toalItem});
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                Console.WriteLine(ex);
+            }
+            
+
+        }
 
         private void addFoodToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -111,8 +219,14 @@ namespace NutritionCal.GUI.Forms
             form.Show();
         }
 
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
 
 
 
     }
+
 }

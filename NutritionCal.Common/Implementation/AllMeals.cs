@@ -1,4 +1,5 @@
-﻿using NutritionCal.Common.Abstraction;
+﻿using System.Globalization;
+using NutritionCal.Common.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace NutritionCal.Common.Implementation
                                               Fat = Convert.ToDecimal(mi.Element("Fat").Value),
                                               Calories = Convert.ToDecimal(mi.Element("Calories").Value),
                                               CalCalories = Convert.ToDecimal(mi.Element("CalCalories").Value)
-                                          }).ToList()
+                                          }).ToList<IMealItem>()
 
                          }).ToList<IMeal>();
             }
@@ -61,8 +62,26 @@ namespace NutritionCal.Common.Implementation
            {
                XAttribute mealAtt = new XAttribute("name", meal.MealName);
                XElement Meal = new XElement("Meal",mealAtt);
-               //Meal.Attribute = new XAttribute("name", meal.MealName);
+               foreach (IMealItem mealItem in meal.mealitems)
+               {
+                   XElement name = new XElement("FoodName") { Value = mealItem.foodName };
+                   XElement measure = new XElement("Measure") { Value = mealItem.Measure.ToString(CultureInfo.InvariantCulture) };
+                   XElement protein = new XElement("Protein") { Value = mealItem.Protein.ToString(CultureInfo.InvariantCulture) };
+                   XElement carbs = new XElement("Carbs") { Value = mealItem.Carbs.ToString(CultureInfo.InvariantCulture) };
+                   XElement fat = new XElement("Fat") { Value = mealItem.Fat.ToString(CultureInfo.InvariantCulture) };
+                   XElement calories = new XElement("Calories") { Value = mealItem.Calories.ToString(CultureInfo.InvariantCulture) };
+                   XElement calCalories = new XElement("CalCalories") { Value = mealItem.CalCalories.ToString(CultureInfo.InvariantCulture) };
+
+                   XElement mealItemElement = new XElement("MealItem", name, measure, protein, carbs, fat, calories, calCalories);
+
+                   Meal.Add(mealItemElement);
+               }
+              allFoods.Add(Meal);
            }
+
+           XDocument xDoc = new XDocument();
+           xDoc.Add(allFoods);
+           xDoc.Save(filename);
        }
 
     }
