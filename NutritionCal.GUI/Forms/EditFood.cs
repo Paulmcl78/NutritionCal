@@ -14,11 +14,14 @@ namespace NutritionCal.GUI.Forms
     public partial class EditFood : Form
     {
         private readonly IFoodStats _foodStats;
+        private IAllMeals _allMeals;
+        private IFood _selectedfood;
 
-        public EditFood(IFoodStats foodStats)
+        public EditFood(IFoodStats foodStats, IAllMeals allMeals)
         {
             InitializeComponent();
             _foodStats = foodStats;
+            _allMeals = allMeals;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -65,15 +68,15 @@ namespace NutritionCal.GUI.Forms
 
         private void lbResults_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IFood food = _foodStats.Foods
+            _selectedfood = _foodStats.Foods
                 .Where(x => x.Name == lbResults.SelectedItem.ToString())
                 .First();
-            txtName.Text = food.Name;
-            txtMeasure.Text = food.Measure.ToString();
-            txtProtein.Text = food.Protein.ToString();
-            txtCarbs.Text = food.Carbs.ToString();
-            txtFats.Text = food.Fat.ToString();
-            txtCalories.Text = food.Calories.ToString();
+            txtName.Text = _selectedfood.Name;
+            txtMeasure.Text = _selectedfood.Measure.ToString();
+            txtProtein.Text = _selectedfood.Protein.ToString();
+            txtCarbs.Text = _selectedfood.Carbs.ToString();
+            txtFats.Text = _selectedfood.Fat.ToString();
+            txtCalories.Text = _selectedfood.Calories.ToString();
 
             tlpFood.Visible = true;
         }
@@ -144,6 +147,8 @@ namespace NutritionCal.GUI.Forms
         {
             if (PassedValidation())
             {
+                _foodStats.Foods.Remove(_selectedfood);
+
                 _foodStats.AddFood(txtName.Text,
                     Convert.ToDecimal(txtMeasure.Text),
                     Convert.ToDecimal(txtProtein.Text),
@@ -152,7 +157,7 @@ namespace NutritionCal.GUI.Forms
                     Convert.ToDecimal(txtCalories.Text)
                    );
 
-                MessageBox.Show(string.Format("{0} has been updated", txtName.Text));
+                MessageBox.Show(string.Format("{0} has been updated", _selectedfood.Name));
 
                 ClearForm();
                 this.Close();
@@ -161,6 +166,12 @@ namespace NutritionCal.GUI.Forms
             {
                 MessageBox.Show("Please ensure all fields have been filled in");
             }
+        }
+
+        private void btDelete_Click(object sender, EventArgs e)
+        {
+            _foodStats.Foods.Remove(_selectedfood);
+            ClearForm();
         }
 
     }

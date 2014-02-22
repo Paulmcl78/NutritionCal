@@ -53,6 +53,7 @@
     <Compile Include="Abstraction\IGoalTypeFactory.cs" />
     <Compile Include="Abstraction\IMeal.cs" />
     <Compile Include="Abstraction\IMealItem.cs" />
+    <Compile Include="Abstraction\IUpdate.cs" />
     <Compile Include="BootStrapper.cs" />
     <Compile Include="GoalTypeEnum.cs" />
     <Compile Include="Implementation\AllMeals.cs" />

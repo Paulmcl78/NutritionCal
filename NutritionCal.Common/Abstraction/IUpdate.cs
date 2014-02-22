@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace NutritionCal.Common.Abstraction
 {
-    public interface IAllMeals
+    public interface IUpdate
     {
-        IList<IMeal> meals { get; set; }
 
-        void AddMeal(IMeal meal);
-
-        void SaveChanged();
+        void Update();
     }
 }

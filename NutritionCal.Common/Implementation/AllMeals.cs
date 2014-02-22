@@ -11,6 +11,12 @@ namespace NutritionCal.Common.Implementation
 {
     public class AllMeals:IAllMeals
     {
+
+        public AllMeals ShallowCopy()
+        {
+            return (AllMeals)this.MemberwiseClone();
+        }
+
         private const string filename = @"..\..\Resources\Meal.xml";
 
         public AllMeals()
@@ -44,12 +50,12 @@ namespace NutritionCal.Common.Implementation
             }
         }
 
-       public IEnumerable<IMeal> meals { get; set; }
+       public IList<IMeal> meals { get; set; }
 
 
        public void AddMeal(IMeal meal)
        {
-           meals = meals.Concat(new[] { meal });
+           meals.Add(meal);
        }
 
        public void SaveChanged()

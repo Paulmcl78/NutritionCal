@@ -11,7 +11,7 @@ using NutritionCal.Common.Implementation;
 
 namespace NutritionCal.GUI.Forms
 {
-    public partial class FrmResults : Form
+    public partial class FrmResults : Form , IUpdate
     {
         private readonly IBaseInformation _baseInformation;
         private readonly IFoodStats _foodStats;
@@ -31,6 +31,12 @@ namespace NutritionCal.GUI.Forms
          private void Results_Load(object sender, EventArgs e)
         {
 
+            BuildFullResults();
+        }
+
+
+        private void BuildFullResults()
+         {
              _dataTable = new DataTable("Results Table");
              BuildHeader();
              buildMeals();
@@ -39,7 +45,7 @@ namespace NutritionCal.GUI.Forms
              buildTraget();
              dataGridView2.DataSource = _dataTable;
              styleTable();
-        }
+         }
 
         private void BuildTotal()
         {
@@ -226,13 +232,14 @@ namespace NutritionCal.GUI.Forms
         
         private void editMealToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditMeal form = CastleContainer.Resolve<EditMeal>();
+            EditMeal form = CastleContainer.Resolve<EditMeal>(new { origin = this });
             form.Show();
         }
 
-
-
-
+        void IUpdate.Update()
+        {
+            BuildFullResults();
+        }
     }
 
 }

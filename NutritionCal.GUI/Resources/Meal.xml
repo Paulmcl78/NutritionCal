@@ -11,7 +11,7 @@
       <CalCalories>65</CalCalories>
     </MealItem>
   </Meal>
-  <Meal name="test2">
+  <Meal name="hello">
     <MealItem>
       <FoodName>Alpro Almond Milk Original</FoodName>
       <Measure>12</Measure>
@@ -20,15 +20,6 @@
       <Fat>0.132</Fat>
       <Calories>2.88</Calories>
       <CalCalories>2.868</CalCalories>
-    </MealItem>
-    <MealItem>
-      <FoodName>Test</FoodName>
-      <Measure>132</Measure>
-      <Protein>0.660</Protein>
-      <Carbs>3.96</Carbs>
-      <Fat>1.452</Fat>
-      <Calories>31.68</Calories>
-      <CalCalories>31.548</CalCalories>
     </MealItem>
   </Meal>
 </Meals>

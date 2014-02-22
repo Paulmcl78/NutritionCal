@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace NutritionCal.Common.Abstraction
 {
-    public interface IMeal
+    public interface IMeal : ICloneable
     {
+
         string MealName { get; set; }
-        IEnumerable<IMealItem> mealitems { get; set; }
+        IList<IMealItem> mealitems { get; set; }
 
         void AddFood(IMealItem mealItem);
 

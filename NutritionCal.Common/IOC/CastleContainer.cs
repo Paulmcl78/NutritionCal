@@ -23,6 +23,11 @@ namespace NutritionCal.Common.IOC
             return Instance.Resolve<T>();
         }
 
+        public static T Resolve<T>(object args)
+        {
+            return Instance.Resolve<T>(args);
+        }
+
         public static void Dispose()
         {
             if (_container == null) return;

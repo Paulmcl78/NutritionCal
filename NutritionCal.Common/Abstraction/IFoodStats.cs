@@ -8,7 +8,7 @@ namespace NutritionCal.Common.Abstraction
 {
     public interface IFoodStats
     {
-        IEnumerable<IFood> Foods { get; set; }
+        IList<IFood> Foods { get; set; }
 
         void AddFood(string name, decimal measure, decimal protein, decimal carbs, decimal fat, decimal calories);
 

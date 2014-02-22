@@ -56,6 +56,12 @@
     <Compile Include="Forms\AddFood.Designer.cs">
       <DependentUpon>AddFood.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddFoodToMeal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddFoodToMeal.Designer.cs">
+      <DependentUpon>AddFoodToMeal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AddMeal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AddFood.resx">
       <DependentUpon>AddFood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddFoodToMeal.resx">
+      <DependentUpon>AddFoodToMeal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddMeal.resx">
       <DependentUpon>AddMeal.cs</DependentUpon>

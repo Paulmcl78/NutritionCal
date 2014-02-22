@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NutritionCal.Common.Abstraction
 {
-    public interface IMealItem
+    public interface IMealItem: ICloneable
     {
         string foodName { get; set; }
         decimal Measure { get; set; }

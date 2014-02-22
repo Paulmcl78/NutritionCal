@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace NutritionCal.GUI.Forms
 {
-    public partial class AddMeal : Form
+    public partial class AddMeal : Form, IUpdate
     {
         private readonly IFoodStats _foodStats;
         private IAllMeals _AllMeals;
@@ -25,73 +25,22 @@ namespace NutritionCal.GUI.Forms
             _AllMeals = meal;
             _meal = new Meal();
 
-            dataGridView1.CellEndEdit += new DataGridViewCellEventHandler(onEndEdit); 
-        }
-
-        private void AddMeal_Load(object sender, EventArgs e)
-        {
-                        
-        }
-
-     
-        private void onEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            IEnumerable<string> results;
-
-            if (string.IsNullOrWhiteSpace(txtSearch.Text))
-            {
-                results = _foodStats.Foods
-                 .OrderBy(o => o.Name)
-                 .Select(i => i.Name);
-            }
-            else
-            {
-                results = _foodStats.Foods
-                .OrderBy(o => o.Name)
-                .Where(x => x.Name.ToLower().Contains(txtSearch.Text.ToLower()))
-                .Select(i => i.Name);
-            }
-
-
-            if (results.Count() == 0)
-            {
-                MessageBox.Show("No results found");
-                return;
-            }
-
-            lbResults.Visible = true;
-            foreach (string name in results)
-            {
-                lbResults.Items.Add(name);
-
-            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            AddFoodToMeal addFood = new AddFoodToMeal(_meal, _foodStats, this);
+            addFood.ShowDialog(); 
+        }
 
+        void IUpdate.Update()
+        {
+            iMealItemBindingSource.Clear();
 
-            IFood food = _foodStats.Foods
-                .Where(x => x.Name == lbResults.SelectedItem.ToString())
-                .First();
-
-            IMealItem mealItem = new MealItem();
-            mealItem.foodName = food.Name;
-            mealItem.Measure = Convert.ToDecimal(txtMeassurment.Text);
-            mealItem.Protein = (food.Protein / food.Measure) * mealItem.Measure;
-            mealItem.Carbs = (food.Carbs / food.Measure) * mealItem.Measure;
-            mealItem.Fat = (food.Fat / food.Measure) * mealItem.Measure;
-            mealItem.Calories = (food.Calories / food.Measure) * mealItem.Measure;
-            mealItem.CalCalories = (mealItem.Protein * 4) + (mealItem.Carbs * 4) + (mealItem.Fat * 9);
-
-            iMealItemBindingSource.Add(mealItem);
-
-            _meal.AddFood(mealItem);
+            foreach (IMealItem mealItem in _meal.mealitems)
+            {
+                iMealItemBindingSource.Add(mealItem);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -107,8 +56,26 @@ namespace NutritionCal.GUI.Forms
             this.Close();
         }
 
-        private void iMealItemBindingSource_CurrentChanged(object sender, EventArgs e)
+
+        private void dataGridView1_CellChanged(object sender, DataGridViewCellEventArgs e)
         {
+           string foodName = dataGridView1[0,e.RowIndex].Value.ToString();
+
+
+           IFood food = _foodStats.Foods
+              .Where(x => x.Name == foodName)
+              .First();
+
+           IMealItem mealItem = _meal.mealitems
+               .Where(x => x.foodName == food.Name)
+               .First();
+
+           mealItem.Measure = Convert.ToDecimal(dataGridView1[e.ColumnIndex, e.RowIndex].Value.ToString());
+           mealItem.Protein = (food.Protein / food.Measure) * mealItem.Measure;
+           mealItem.Carbs = (food.Carbs / food.Measure) * mealItem.Measure;
+           mealItem.Fat = (food.Fat / food.Measure) * mealItem.Measure;
+           mealItem.Calories = (food.Calories / food.Measure) * mealItem.Measure;
+           mealItem.CalCalories = (mealItem.Protein * 4) + (mealItem.Carbs * 4) + (mealItem.Fat * 9);
 
         }
 

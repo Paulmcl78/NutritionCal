@@ -9,6 +9,12 @@ namespace NutritionCal.Common.Implementation
 {
     public class MealItem: IMealItem
     {
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
         public string foodName { get; set; }
         public decimal Measure { get; set; }
         public decimal Protein { get; set; }

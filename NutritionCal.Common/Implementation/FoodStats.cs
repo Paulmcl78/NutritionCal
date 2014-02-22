@@ -17,17 +17,17 @@ namespace NutritionCal.Common.Implementation
             {
                 XDocument doc = XDocument.Load(filename);
 
-                Foods = from c in doc.Descendants("Food")
-                        select new Food()
-                            {
-                                Name = c.Element("Name").Value,
-                                Measure = Convert.ToDecimal(c.Element("Measure").Value),
-                                Protein = Convert.ToDecimal(c.Element("Protein").Value),
-                                Carbs = Convert.ToDecimal(c.Element("Carbs").Value),
-                                Fat = Convert.ToDecimal(c.Element("Fat").Value),
-                                Calories = Convert.ToDecimal(c.Element("Calories").Value),
+                Foods = (from c in doc.Descendants("Food")
+                         select new Food()
+                             {
+                                 Name = c.Element("Name").Value,
+                                 Measure = Convert.ToDecimal(c.Element("Measure").Value),
+                                 Protein = Convert.ToDecimal(c.Element("Protein").Value),
+                                 Carbs = Convert.ToDecimal(c.Element("Carbs").Value),
+                                 Fat = Convert.ToDecimal(c.Element("Fat").Value),
+                                 Calories = Convert.ToDecimal(c.Element("Calories").Value),
 
-                            };
+                             }).ToList<IFood>();
             }
             catch (Exception ex)
             {
@@ -36,14 +36,12 @@ namespace NutritionCal.Common.Implementation
 
         }
 
-        public IEnumerable<IFood> Foods { get; set; }
+        public IList<IFood> Foods { get; set; }
         
         
         public void AddFood(string name, decimal measure, decimal protein, decimal carbs, decimal fat, decimal calories)
         {
-            Foods = Foods.Concat(new[]
-                {
-                    new Food
+            Foods.Add(new Food
                         {
                             Name = name,
                             Measure = measure,
@@ -51,8 +49,7 @@ namespace NutritionCal.Common.Implementation
                             Carbs = carbs,
                             Fat = fat,
                             Calories = calories
-                        }
-                });
+                        });
         }
 
         public void SaveChanges()
