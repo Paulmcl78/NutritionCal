@@ -14,6 +14,7 @@ namespace NutritionCal.GUI.IOC
             container.Register(Component.For<AddFood>().LifeStyle.Transient);
             container.Register(Component.For<EditFood>().LifeStyle.Transient);
             container.Register(Component.For<AddMeal>().LifeStyle.Transient);
+            container.Register(Component.For<EditMeal>().LifeStyle.Transient);
         }
     }
 }

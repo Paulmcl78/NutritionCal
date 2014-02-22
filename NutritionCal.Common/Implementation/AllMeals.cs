@@ -56,8 +56,6 @@ namespace NutritionCal.Common.Implementation
        {
            XElement allFoods = new XElement("Meals");
 
-           int count = 0;
-
            foreach(IMeal meal in meals)
            {
                XAttribute mealAtt = new XAttribute("name", meal.MealName);

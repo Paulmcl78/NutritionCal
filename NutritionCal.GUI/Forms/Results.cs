@@ -223,6 +223,12 @@ namespace NutritionCal.GUI.Forms
         {
 
         }
+        
+        private void editMealToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditMeal form = CastleContainer.Resolve<EditMeal>();
+            form.Show();
+        }
 
 
 
