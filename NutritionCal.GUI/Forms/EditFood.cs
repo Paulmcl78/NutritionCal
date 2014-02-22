@@ -1,4 +1,5 @@
 ﻿using NutritionCal.Common.Abstraction;
+using NutritionCal.Common.Implementation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -170,8 +171,33 @@ namespace NutritionCal.GUI.Forms
 
         private void btDelete_Click(object sender, EventArgs e)
         {
+            deleteFoodFromAllMeals();
+
             _foodStats.Foods.Remove(_selectedfood);
             ClearForm();
+        }
+
+        private void deleteFoodFromAllMeals()
+        {
+         
+            int AllMealCount = _allMeals.meals.Count();
+
+            for (int i =0; i < AllMealCount; i++)
+            {
+                IMeal meal = _allMeals.meals[i];
+
+                int itemCount = meal.mealitems.Count();
+
+                for(int j=meal.mealitems.Count() -1; j > 0; j--)
+                {
+                    if(meal.mealitems[j].foodName == _selectedfood.Name)
+                    {
+                        _allMeals.meals[i].mealitems.RemoveAt(j);
+                    }
+                }
+            }
+
+
         }
 
     }
