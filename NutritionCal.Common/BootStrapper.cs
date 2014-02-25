@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.Windsor;
+﻿using Castle.Windsor;
 
 namespace NutritionCal.Common
 {
     public class BootStrapper
     {
         private static readonly BootStrapper instance = new BootStrapper();
-        private static WindsorContainer container = new WindsorContainer();
+        private static readonly WindsorContainer Container = new WindsorContainer();
 
         public static BootStrapper Instance { get { return instance; } }
 
@@ -24,7 +19,7 @@ namespace NutritionCal.Common
 
         public WindsorContainer BootstrapIoc()
         {
-            return container;
+            return Container;
         }
 
 

@@ -9,23 +9,35 @@ namespace NutritionCal.Common.Implementation
 {
     public class FoodStats :IFoodStats
     {
-        private const string filename = @"..\..\Resources\FoodStats.xml";
+        private const string Filename = @"..\..\Resources\FoodStats.xml";
 
         public FoodStats()
         {
             try
             {
-                XDocument doc = XDocument.Load(filename);
+                XDocument doc = XDocument.Load(Filename);
 
                 Foods = (from c in doc.Descendants("Food")
-                         select new Food()
+                         let xElementName = c.Element("Name")
+                         where xElementName != null
+                         let xElementMeasure = c.Element("Measure")
+                         where xElementMeasure != null
+                         let xElementProtein = c.Element("Protein")
+                         where xElementProtein != null
+                         let xElementCarbs = c.Element("Carbs")
+                         where xElementCarbs != null
+                         let xElementFats = c.Element("Fat")
+                         where xElementFats != null
+                         let xElementCalories = c.Element("Calories")
+                         where xElementCalories != null
+                         select new Food
                              {
-                                 Name = c.Element("Name").Value,
-                                 Measure = Convert.ToDecimal(c.Element("Measure").Value),
-                                 Protein = Convert.ToDecimal(c.Element("Protein").Value),
-                                 Carbs = Convert.ToDecimal(c.Element("Carbs").Value),
-                                 Fat = Convert.ToDecimal(c.Element("Fat").Value),
-                                 Calories = Convert.ToDecimal(c.Element("Calories").Value),
+                                 Name = xElementName.Value,
+                                 Measure = Convert.ToDecimal(xElementMeasure.Value),
+                                 Protein = Convert.ToDecimal(xElementProtein.Value),
+                                 Carbs = Convert.ToDecimal(xElementCarbs.Value),
+                                 Fat = Convert.ToDecimal(xElementFats.Value),
+                                 Calories = Convert.ToDecimal(xElementCalories.Value),
 
                              }).ToList<IFood>();
             }
@@ -76,11 +88,11 @@ namespace NutritionCal.Common.Implementation
  
             XDocument xDoc = new XDocument();
             xDoc.Add(allFoods);
-            xDoc.Save(filename);
+            xDoc.Save(Filename);
         }
 
 
-        public bool foodExists(string name)
+        public bool FoodExists(string name)
         {
             return Foods.Any(x => x.Name.ToLower() == name.ToLower());
         }

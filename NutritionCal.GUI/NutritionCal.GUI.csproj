@@ -124,6 +124,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\NutritionCal.Common.Abstraction.IFood.datasource" />
@@ -151,7 +152,10 @@
     <Content Include="Resources\FoodStats.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Resources\Meal.xml" />
+    <Content Include="Resources\Meal.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\Profile.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -114,4 +114,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddFood_lblSave_Click_Please_ensure_all_fields_have_been_filled_in" xml:space="preserve">
+    <value>Please ensure all fields have been filled in</value>
+  </data>
+  <data name="A_food_with_this_name_already_exists__please_chose_another_name" xml:space="preserve">
+    <value>A food with this name already exists, please chose another name</value>
+  </data>
+  <data name="No_results_found" xml:space="preserve">
+    <value>No results found</value>
+  </data>
+  <data name="No_food_selected_or_no_measuremented_entered" xml:space="preserve">
+    <value>No food selected or no measuremented entered</value>
+  </data>
 </root>

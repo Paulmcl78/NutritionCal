@@ -6,6 +6,8 @@ namespace NutritionCal.Common.Implementation
     public class BaseInformation : IBaseInformation
     {
         public double Weight { get; set; }
+        public double EnteredWeight { get; set; }
+        public WeightUnits WeightUnits { get; set; }
         public int Calories { get; private set; }
         public double Protein { get; private set; }
         public double Carbohydrates { get; private set; }
@@ -13,9 +15,11 @@ namespace NutritionCal.Common.Implementation
         public double ProteinPercentage { get; private set; }
         public double CarbohydratesPercentage { get; private set; }
         public double FatsPercentage { get; private set; }
-        
+        public IGoalType GoalType { get; private set; }
+
         public void Calculate(IGoalType goalType)
         {
+            GoalType = goalType;
             Protein = CalulateProtein(goalType);
             Carbohydrates = CalulateCarbs(goalType);
             Fats = CalulateFats(goalType);

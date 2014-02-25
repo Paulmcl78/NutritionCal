@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace NutritionCal.Common.Abstraction
 {
@@ -12,7 +8,7 @@ namespace NutritionCal.Common.Abstraction
 
         void AddFood(string name, decimal measure, decimal protein, decimal carbs, decimal fat, decimal calories);
 
-        bool foodExists(string name);
+        bool FoodExists(string name);
         
         void SaveChanges();
     }

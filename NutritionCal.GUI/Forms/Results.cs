@@ -14,16 +14,14 @@ namespace NutritionCal.GUI.Forms
     public partial class FrmResults : Form , IUpdate
     {
         private readonly IBaseInformation _baseInformation;
-        private readonly IFoodStats _foodStats;
         private readonly IAllMeals _allMeals;
         private DataTable _dataTable;
         private IEnumerable<IMealItem> _totalMeals;
         
-        public FrmResults(IBaseInformation baseInformation, IFoodStats foodstats, IAllMeals allMeals)
+        public FrmResults(IBaseInformation baseInformation, IAllMeals allMeals)
         {
             InitializeComponent();
             _baseInformation = baseInformation;
-            _foodStats = foodstats;
             _allMeals = allMeals;
             _totalMeals = Enumerable.Empty<IMealItem>();
         }
@@ -32,6 +30,33 @@ namespace NutritionCal.GUI.Forms
         {
 
             BuildFullResults();
+
+             Controls.Add(BuildStrip());
+             Refresh();
+
+        }
+
+        private StatusStrip BuildStrip()
+        {
+            StatusStrip status = new StatusStrip();
+            ToolStripStatusLabel weight = new ToolStripStatusLabel(string.Format("Current weight : {0}{1}", _baseInformation.EnteredWeight, _baseInformation.WeightUnits))
+                {
+                    BorderStyle = Border3DStyle.Etched,
+                    BorderSides = ToolStripStatusLabelBorderSides.Right
+                };
+
+            status.Items.Add(weight);
+
+            ToolStripStatusLabel goal = new ToolStripStatusLabel(string.Format("Goal : {0}", _baseInformation.GoalType.GetGoalType()))
+            {
+                BorderStyle = Border3DStyle.Etched,
+                BorderSides = ToolStripStatusLabelBorderSides.Right
+            };
+
+            
+            status.Items.Add(goal);
+
+            return status;
         }
 
 
@@ -39,12 +64,12 @@ namespace NutritionCal.GUI.Forms
          {
              _dataTable = new DataTable("Results Table");
              BuildHeader();
-             buildMeals();
+             BuildMeals();
              AddBlank();
              BuildTotal();
-             buildTraget();
+             BuildTraget();
              dataGridView2.DataSource = _dataTable;
-             styleTable();
+             StyleTable();
          }
 
         private void BuildTotal()
@@ -82,7 +107,7 @@ namespace NutritionCal.GUI.Forms
 
         }
 
-        private void styleTable()
+        private void StyleTable()
         {
             int counter = 0;
 
@@ -116,7 +141,7 @@ namespace NutritionCal.GUI.Forms
 
         }
 
-         private void buildTraget()
+         private void BuildTraget()
          {
 
              _dataTable.Rows.Add("Target",
@@ -143,7 +168,7 @@ namespace NutritionCal.GUI.Forms
             _dataTable.Rows.Add();
         }
 
-        private void buildMeals()
+        private void BuildMeals()
         {
 
             try
@@ -151,7 +176,7 @@ namespace NutritionCal.GUI.Forms
                 foreach (IMeal meal in _allMeals.meals)
                 {
                     IMealItem toalItem = new MealItem();
-                   foreach (IMealItem mealItem in meal.mealitems)
+                   foreach (IMealItem mealItem in meal.Mealitems)
                     {
 
 
@@ -196,21 +221,15 @@ namespace NutritionCal.GUI.Forms
 
         private void resetWeightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clearForm();
             Form1 resetWeight = CastleContainer.Resolve<Form1>();
             resetWeight.Show();
-            this.Close();
+            Close();
         }
 
-
-        private void clearForm()
-        {
-
-        }
 
         private void editFoodToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditFood results = CastleContainer.Resolve<EditFood>();
+            EditFood results = CastleContainer.Resolve<EditFood>(new { origin = this });
             results.Show();
         }
 
@@ -225,10 +244,6 @@ namespace NutritionCal.GUI.Forms
             form.Show();
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
         
         private void editMealToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -240,6 +255,8 @@ namespace NutritionCal.GUI.Forms
         {
             BuildFullResults();
         }
+
+
     }
 
 }

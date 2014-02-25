@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NutritionCal.Common.Abstraction
 {
@@ -10,7 +7,7 @@ namespace NutritionCal.Common.Abstraction
     {
 
         string MealName { get; set; }
-        IList<IMealItem> mealitems { get; set; }
+        IList<IMealItem> Mealitems { get; set; }
 
         void AddFood(IMealItem mealItem);
 

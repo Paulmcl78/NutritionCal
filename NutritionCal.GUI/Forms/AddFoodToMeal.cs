@@ -2,33 +2,29 @@
 using NutritionCal.Common.Implementation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using NutritionCal.GUI.Properties;
 
 namespace NutritionCal.GUI.Forms
 {
     public partial class AddFoodToMeal : Form
     {
-        private IFoodStats _foodStats;
-        private IMeal _mealOrg;
-        private IUpdate _origin;
+        private readonly IFoodStats _foodStats;
+        private readonly IMeal _mealOrg;
+        private readonly IUpdate _origin;
 
-        public AddFoodToMeal(IMeal AllMeals, IFoodStats foodStats, IUpdate original)
+        public AddFoodToMeal(IMeal allMeals, IFoodStats foodStats, IUpdate original)
         {
             InitializeComponent();
-            _mealOrg = AllMeals;
+            _mealOrg = allMeals;
             _foodStats = foodStats;
             _origin = original;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -52,14 +48,15 @@ namespace NutritionCal.GUI.Forms
             }
 
 
-            if (results.Count() == 0)
+            IEnumerable<string> names = results as string[] ?? results.ToArray();
+            if (!names.Any())
             {
-                MessageBox.Show("No results found");
+                MessageBox.Show(Resources.No_results_found);
                 return;
             }
 
             lbResults.Visible = true;
-            foreach (string name in results)
+            foreach (string name in names)
             {
                 lbResults.Items.Add(name);
 
@@ -70,16 +67,14 @@ namespace NutritionCal.GUI.Forms
         {
             if(string.IsNullOrWhiteSpace(txtMeassurment.Text) || lbResults.SelectedIndex == -1)
             {
-                MessageBox.Show("No food selected or no measuremented entered");
+                MessageBox.Show(Resources.No_food_selected_or_no_measuremented_entered);
             }
             else 
             {
-                IFood food = _foodStats.Foods
-               .Where(x => x.Name == lbResults.SelectedItem.ToString())
-               .First();
+                IFood food = _foodStats.Foods.First(x => x.Name == lbResults.SelectedItem.ToString());
 
                 IMealItem mealItem = new MealItem();
-                mealItem.foodName = food.Name;
+                mealItem.FoodName = food.Name;
                 mealItem.Measure = Convert.ToDecimal(txtMeassurment.Text);
                 mealItem.Protein = (food.Protein / food.Measure) * mealItem.Measure;
                 mealItem.Carbs = (food.Carbs / food.Measure) * mealItem.Measure;
@@ -90,7 +85,7 @@ namespace NutritionCal.GUI.Forms
                 _mealOrg.AddFood(mealItem);
 
                 _origin.Update();
-                this.Close();
+                Close();
             }
         }
 

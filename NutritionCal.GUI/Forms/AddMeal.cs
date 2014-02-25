@@ -1,13 +1,7 @@
 ﻿using NutritionCal.Common.Abstraction;
 using NutritionCal.Common.Implementation;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NutritionCal.GUI.Forms
@@ -15,15 +9,17 @@ namespace NutritionCal.GUI.Forms
     public partial class AddMeal : Form, IUpdate
     {
         private readonly IFoodStats _foodStats;
-        private IAllMeals _AllMeals;
-        private IMeal _meal;
+        private readonly IAllMeals _allMeals;
+        private readonly IMeal _meal;
+        private readonly IUpdate _origin;
 
-        public AddMeal(IFoodStats foodStats, IAllMeals meal)
+        public AddMeal(IFoodStats foodStats, IAllMeals meal, IUpdate origin)
         {
             InitializeComponent();
             _foodStats = foodStats;
-            _AllMeals = meal;
+            _allMeals = meal;
             _meal = new Meal();
+            _origin = origin;
 
         }
 
@@ -37,7 +33,7 @@ namespace NutritionCal.GUI.Forms
         {
             iMealItemBindingSource.Clear();
 
-            foreach (IMealItem mealItem in _meal.mealitems)
+            foreach (IMealItem mealItem in _meal.Mealitems)
             {
                 iMealItemBindingSource.Add(mealItem);
             }
@@ -45,15 +41,16 @@ namespace NutritionCal.GUI.Forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             _meal.MealName = txtName.Text;
-            _AllMeals.AddMeal(_meal);
-            _AllMeals.SaveChanged();
-            this.Close();
+            _allMeals.AddMeal(_meal);
+            _allMeals.SaveChanged();
+            _origin.Update();
+            Close();
         }
 
 
@@ -62,13 +59,9 @@ namespace NutritionCal.GUI.Forms
            string foodName = dataGridView1[0,e.RowIndex].Value.ToString();
 
 
-           IFood food = _foodStats.Foods
-              .Where(x => x.Name == foodName)
-              .First();
+           IFood food = _foodStats.Foods.First(x => x.Name == foodName);
 
-           IMealItem mealItem = _meal.mealitems
-               .Where(x => x.foodName == food.Name)
-               .First();
+           IMealItem mealItem = _meal.Mealitems.First(x => x.FoodName == food.Name);
 
            mealItem.Measure = Convert.ToDecimal(dataGridView1[e.ColumnIndex, e.RowIndex].Value.ToString());
            mealItem.Protein = (food.Protein / food.Measure) * mealItem.Measure;

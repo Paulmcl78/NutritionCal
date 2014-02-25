@@ -1,13 +1,7 @@
 ﻿using NutritionCal.Common.Abstraction;
-using NutritionCal.Common.Implementation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NutritionCal.GUI.Forms
@@ -16,15 +10,15 @@ namespace NutritionCal.GUI.Forms
     {
 
         private readonly IFoodStats _foodStats;
-        private IAllMeals _allMeals;
-        private IMeal mealOrg;
-        private IMeal mealUpdate;
-        private IUpdate _origin;
+        private readonly IAllMeals _allMeals;
+        private IMeal _mealOrg;
+        private IMeal _mealUpdate;
+        private readonly IUpdate _origin;
 
-        public EditMeal(IAllMeals AllMeals,IFoodStats foodStats, IUpdate origin)
+        public EditMeal(IAllMeals allMeals,IFoodStats foodStats, IUpdate origin)
         {
             InitializeComponent();
-            _allMeals = AllMeals;
+            _allMeals = allMeals;
             _foodStats = foodStats;
             _origin = origin;
 
@@ -37,17 +31,9 @@ namespace NutritionCal.GUI.Forms
         {
             string foodName = dataGridView1[0, e.Row.Index].Value.ToString();
 
-            IList<IMealItem> newList = new List<IMealItem>();
+            IList<IMealItem> newList = _mealUpdate.Mealitems.Where(mealItem => mealItem.FoodName != foodName).ToList();
 
-            foreach (IMealItem mealItem in mealUpdate.mealitems)
-            {
-                if (mealItem.foodName != foodName)
-                {
-                    newList.Add(mealItem);
-                }
-            }
-
-            mealUpdate.mealitems = newList;
+            _mealUpdate.Mealitems = newList;
         }     
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -55,26 +41,24 @@ namespace NutritionCal.GUI.Forms
             lbResults.Items.Clear();
             if(string.IsNullOrEmpty(txtSearch.Text))
             {
-                getResults();
+                GetResults();
             }
 
             else
             {
-                getResults(txtSearch.Text);
+                GetResults(txtSearch.Text);
             }
 
             lbResults.Visible = true;
         }
 
 
-        private void getResults(string mealName = null)
+        private void GetResults(string mealName = null)
         {
-            if (mealName == null)
+            if (mealName != null) return;
+            foreach (IMeal meal in _allMeals.meals)
             {
-                foreach (IMeal meal in _allMeals.meals)
-                {
-                    lbResults.Items.Add(meal.MealName);
-                }
+                lbResults.Items.Add(meal.MealName);
             }
         }
 
@@ -82,15 +66,13 @@ namespace NutritionCal.GUI.Forms
         {
             iMealItemBindingSource.Clear();
 
-            mealOrg = _allMeals.meals
-                .Where(x => x.MealName == lbResults.SelectedItem.ToString())
-                .First();
+            _mealOrg = _allMeals.meals.First(x => x.MealName == lbResults.SelectedItem.ToString());
 
-            mealUpdate = (IMeal)mealOrg.Clone();
+            _mealUpdate = (IMeal)_mealOrg.Clone();
 
-            txtName.Text = mealUpdate.MealName;
+            txtName.Text = _mealUpdate.MealName;
 
-            foreach (IMealItem mealItem in mealUpdate.mealitems)
+            foreach (IMealItem mealItem in _mealUpdate.Mealitems)
             {
                 iMealItemBindingSource.Add(mealItem);
             }
@@ -100,7 +82,7 @@ namespace NutritionCal.GUI.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
 
@@ -110,13 +92,9 @@ namespace NutritionCal.GUI.Forms
             string foodName = dataGridView1[0, e.RowIndex].Value.ToString();
 
 
-            IFood food = _foodStats.Foods
-               .Where(x => x.Name == foodName)
-               .First();
+            IFood food = _foodStats.Foods.First(x => x.Name == foodName);
 
-            IMealItem mealItem = mealUpdate.mealitems
-                .Where(x => x.foodName == food.Name)
-                .First();
+            IMealItem mealItem = _mealUpdate.Mealitems.First(x => x.FoodName == food.Name);
 
             mealItem.Measure = Convert.ToDecimal(dataGridView1[e.ColumnIndex, e.RowIndex].Value.ToString());
             mealItem.Protein = (food.Protein / food.Measure) * mealItem.Measure;
@@ -130,24 +108,22 @@ namespace NutritionCal.GUI.Forms
         private void btSave_Click(object sender, EventArgs e)
         {
 
-            mealUpdate.MealName = txtName.Text;
+            _mealUpdate.MealName = txtName.Text;
 
-            IMeal mealtoRemove = _allMeals.meals
-                .Where(x => x.MealName == mealOrg.MealName)
-                .First();
+            IMeal mealtoRemove = _allMeals.meals.First(x => x.MealName == _mealOrg.MealName);
 
             _allMeals.meals.Remove(mealtoRemove);
-            _allMeals.meals.Add(mealUpdate);
+            _allMeals.meals.Add(_mealUpdate);
            
             _allMeals.SaveChanged();
 
             _origin.Update();
-            this.Close();
+            Close();
         }
 
         private void btnAddFood_Click(object sender, EventArgs e)
         {
-            AddFoodToMeal addFood = new AddFoodToMeal(mealUpdate, _foodStats, this);
+            AddFoodToMeal addFood = new AddFoodToMeal(_mealUpdate, _foodStats, this);
 
             addFood.ShowDialog();
         }
@@ -161,7 +137,7 @@ namespace NutritionCal.GUI.Forms
         {
             iMealItemBindingSource.Clear();
 
-            foreach (IMealItem mealItem in mealUpdate.mealitems)
+            foreach (IMealItem mealItem in _mealUpdate.Mealitems)
             {
                 iMealItemBindingSource.Add(mealItem);
             }
@@ -169,16 +145,14 @@ namespace NutritionCal.GUI.Forms
 
         private void btDelete_Click(object sender, EventArgs e)
         {
-            IMeal mealtoRemove = _allMeals.meals
-               .Where(x => x.MealName == mealOrg.MealName)
-               .First();
+            IMeal mealtoRemove = _allMeals.meals.First(x => x.MealName == _mealOrg.MealName);
 
             _allMeals.meals.Remove(mealtoRemove);
 
             _allMeals.SaveChanged();
 
             _origin.Update();
-            this.Close();
+            Close();
         }
     }
 }

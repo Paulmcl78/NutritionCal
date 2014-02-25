@@ -40,9 +40,9 @@
             this.editFoodToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mealsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addMealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editMealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.editMealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -56,8 +56,8 @@
             this.mealsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1081, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(849, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,25 +68,25 @@
             this.toolStripSeparator1,
             this.quitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // resetWeightToolStripMenuItem
             // 
             this.resetWeightToolStripMenuItem.Name = "resetWeightToolStripMenuItem";
-            this.resetWeightToolStripMenuItem.Size = new System.Drawing.Size(163, 24);
+            this.resetWeightToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.resetWeightToolStripMenuItem.Text = "Reset weight";
             this.resetWeightToolStripMenuItem.Click += new System.EventHandler(this.resetWeightToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(138, 6);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(163, 24);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -96,20 +96,20 @@
             this.addFoodToolStripMenuItem,
             this.editFoodToolStripMenuItem});
             this.foodToolStripMenuItem.Name = "foodToolStripMenuItem";
-            this.foodToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.foodToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.foodToolStripMenuItem.Text = "Food";
             // 
             // addFoodToolStripMenuItem
             // 
             this.addFoodToolStripMenuItem.Name = "addFoodToolStripMenuItem";
-            this.addFoodToolStripMenuItem.Size = new System.Drawing.Size(144, 24);
+            this.addFoodToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.addFoodToolStripMenuItem.Text = "Add Food";
             this.addFoodToolStripMenuItem.Click += new System.EventHandler(this.addFoodToolStripMenuItem_Click);
             // 
             // editFoodToolStripMenuItem
             // 
             this.editFoodToolStripMenuItem.Name = "editFoodToolStripMenuItem";
-            this.editFoodToolStripMenuItem.Size = new System.Drawing.Size(144, 24);
+            this.editFoodToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.editFoodToolStripMenuItem.Text = "Edit Food";
             this.editFoodToolStripMenuItem.Click += new System.EventHandler(this.editFoodToolStripMenuItem_Click);
             // 
@@ -119,23 +119,30 @@
             this.addMealToolStripMenuItem,
             this.editMealToolStripMenuItem});
             this.mealsToolStripMenuItem.Name = "mealsToolStripMenuItem";
-            this.mealsToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
+            this.mealsToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.mealsToolStripMenuItem.Text = "Meals";
             // 
             // addMealToolStripMenuItem
             // 
             this.addMealToolStripMenuItem.Name = "addMealToolStripMenuItem";
-            this.addMealToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.addMealToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.addMealToolStripMenuItem.Text = "Add Meal";
             this.addMealToolStripMenuItem.Click += new System.EventHandler(this.addMealToolStripMenuItem_Click);
+            // 
+            // editMealToolStripMenuItem
+            // 
+            this.editMealToolStripMenuItem.Name = "editMealToolStripMenuItem";
+            this.editMealToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.editMealToolStripMenuItem.Text = "Edit Meal";
+            this.editMealToolStripMenuItem.Click += new System.EventHandler(this.editMealToolStripMenuItem_Click);
             // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(15, 351);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Location = new System.Drawing.Point(11, 285);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(56, 19);
             this.button1.TabIndex = 15;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -157,38 +164,28 @@
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Enabled = false;
             this.dataGridView2.EnableHeadersVisualStyles = false;
-            this.dataGridView2.Location = new System.Drawing.Point(16, 33);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView2.Location = new System.Drawing.Point(0, 27);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.ShowEditingIcon = false;
-            this.dataGridView2.Size = new System.Drawing.Size(1055, 311);
+            this.dataGridView2.Size = new System.Drawing.Size(857, 253);
             this.dataGridView2.TabIndex = 19;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
-            // 
-            // editMealToolStripMenuItem
-            // 
-            this.editMealToolStripMenuItem.Name = "editMealToolStripMenuItem";
-            this.editMealToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
-            this.editMealToolStripMenuItem.Text = "Edit Meal";
-            this.editMealToolStripMenuItem.Click += new System.EventHandler(this.editMealToolStripMenuItem_Click);
             // 
             // FrmResults
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button1;
-            this.ClientSize = new System.Drawing.Size(1081, 582);
+            this.ClientSize = new System.Drawing.Size(849, 462);
             this.ControlBox = false;
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmResults";
             this.ShowIcon = false;
             this.Text = "Nutrition Cal";

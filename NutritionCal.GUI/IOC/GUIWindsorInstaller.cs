@@ -5,7 +5,7 @@ using NutritionCal.GUI.Forms;
 
 namespace NutritionCal.GUI.IOC
 {
-    public class GUIWindsorInstaller :IWindsorInstaller
+    public class GuiWindsorInstaller :IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {

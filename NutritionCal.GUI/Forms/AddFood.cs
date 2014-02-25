@@ -1,14 +1,7 @@
 ﻿using NutritionCal.Common.Abstraction;
-using NutritionCal.Common.Implementation;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using NutritionCal.GUI.Properties;
 
 namespace NutritionCal.GUI.Forms
 {
@@ -35,7 +28,7 @@ namespace NutritionCal.GUI.Forms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ClearForm();
-            this.Close();
+            Close();
         }
 
          private void ClearForm()
@@ -63,11 +56,11 @@ namespace NutritionCal.GUI.Forms
                  MessageBox.Show(string.Format("{0} has been added to your list of foods", txtName.Text));
 
                  ClearForm();
-                 this.Close();
+                 Close();
              }
              else
              {
-                 MessageBox.Show("Please ensure all fields have been filled in");
+                 MessageBox.Show(Resources.AddFood_lblSave_Click_Please_ensure_all_fields_have_been_filled_in);
              }
              
 
@@ -99,9 +92,9 @@ namespace NutritionCal.GUI.Forms
              {
                  return false;
              }
-             if (_foodStats.foodExists(txtName.Text))
+             if (_foodStats.FoodExists(txtName.Text))
              {
-                    MessageBox.Show("A food with this name already exists, please chose another name");
+                    MessageBox.Show(Resources.A_food_with_this_name_already_exists__please_chose_another_name);
                     return false;
              }
 

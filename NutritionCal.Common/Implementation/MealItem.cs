@@ -1,9 +1,4 @@
 ﻿using NutritionCal.Common.Abstraction;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NutritionCal.Common.Implementation
 {
@@ -12,10 +7,10 @@ namespace NutritionCal.Common.Implementation
 
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
 
-        public string foodName { get; set; }
+        public string FoodName { get; set; }
         public decimal Measure { get; set; }
         public decimal Protein { get; set; }
         public decimal Carbs { get; set; }

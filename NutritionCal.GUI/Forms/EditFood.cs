@@ -1,13 +1,9 @@
-﻿using NutritionCal.Common.Abstraction;
+﻿using System.Globalization;
+using NutritionCal.Common.Abstraction;
 using NutritionCal.Common.Implementation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NutritionCal.GUI.Forms
@@ -15,14 +11,16 @@ namespace NutritionCal.GUI.Forms
     public partial class EditFood : Form
     {
         private readonly IFoodStats _foodStats;
-        private IAllMeals _allMeals;
+        private readonly IAllMeals _allMeals;
         private IFood _selectedfood;
+        private readonly IUpdate _origin;
 
-        public EditFood(IFoodStats foodStats, IAllMeals allMeals)
+        public EditFood(IFoodStats foodStats, IAllMeals allMeals, IUpdate origin)
         {
             InitializeComponent();
             _foodStats = foodStats;
             _allMeals = allMeals;
+            _origin = origin;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -47,14 +45,15 @@ namespace NutritionCal.GUI.Forms
             }
 
 
-            if (results.Count() == 0)
+            IEnumerable<string> names = results as IList<string> ?? results.ToList();
+            if (!names.Any())
             {
-                MessageBox.Show("No results found");
+                MessageBox.Show(@"No results found");
                 return;
             }
 
             lbResults.Visible = true;
-         foreach(string name in results)
+         foreach(string name in names)
          {
              lbResults.Items.Add(name);
              
@@ -69,15 +68,13 @@ namespace NutritionCal.GUI.Forms
 
         private void lbResults_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _selectedfood = _foodStats.Foods
-                .Where(x => x.Name == lbResults.SelectedItem.ToString())
-                .First();
+            _selectedfood = _foodStats.Foods.First(x => x.Name == lbResults.SelectedItem.ToString());
             txtName.Text = _selectedfood.Name;
-            txtMeasure.Text = _selectedfood.Measure.ToString();
-            txtProtein.Text = _selectedfood.Protein.ToString();
-            txtCarbs.Text = _selectedfood.Carbs.ToString();
-            txtFats.Text = _selectedfood.Fat.ToString();
-            txtCalories.Text = _selectedfood.Calories.ToString();
+            txtMeasure.Text = _selectedfood.Measure.ToString(CultureInfo.InvariantCulture);
+            txtProtein.Text = _selectedfood.Protein.ToString(CultureInfo.InvariantCulture);
+            txtCarbs.Text = _selectedfood.Carbs.ToString(CultureInfo.InvariantCulture);
+            txtFats.Text = _selectedfood.Fat.ToString(CultureInfo.InvariantCulture);
+            txtCalories.Text = _selectedfood.Calories.ToString(CultureInfo.InvariantCulture);
 
             tlpFood.Visible = true;
         }
@@ -110,7 +107,8 @@ namespace NutritionCal.GUI.Forms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ClearForm();
-            this.Close();
+            _origin.Update();
+            Close();
         }
 
 
@@ -160,44 +158,93 @@ namespace NutritionCal.GUI.Forms
 
                 MessageBox.Show(string.Format("{0} has been updated", _selectedfood.Name));
 
+                _foodStats.SaveChanges();
+
                 ClearForm();
-                this.Close();
+                UpdateAllMeals(_selectedfood.Name, txtName.Text);
+                _origin.Update();
+                Close();
             }
             else
             {
-                MessageBox.Show("Please ensure all fields have been filled in");
+                MessageBox.Show(@"Please ensure all fields have been filled in");
             }
         }
 
+        
+
         private void btDelete_Click(object sender, EventArgs e)
         {
-            deleteFoodFromAllMeals();
+            DeleteFoodFromAllMeals();
 
             _foodStats.Foods.Remove(_selectedfood);
             ClearForm();
         }
 
-        private void deleteFoodFromAllMeals()
+        private void DeleteFoodFromAllMeals()
         {
          
-            int AllMealCount = _allMeals.meals.Count();
+            int allMealCount = _allMeals.meals.Count()-1;
 
-            for (int i =0; i < AllMealCount; i++)
+            for (int i =0; i < allMealCount; i++)
             {
                 IMeal meal = _allMeals.meals[i];
 
-                int itemCount = meal.mealitems.Count();
+                int itemCount = meal.Mealitems.Count()-1;
 
-                for(int j=meal.mealitems.Count() -1; j > 0; j--)
+                for (int j = itemCount; j > 0; j--)
                 {
-                    if(meal.mealitems[j].foodName == _selectedfood.Name)
+                    if(meal.Mealitems[j].FoodName == _selectedfood.Name)
                     {
-                        _allMeals.meals[i].mealitems.RemoveAt(j);
+                        _allMeals.meals[i].Mealitems.RemoveAt(j);
                     }
                 }
             }
 
+            _allMeals.SaveChanged();
 
+
+        }
+
+        private void UpdateAllMeals(string previousName, string newName)
+        {
+            IFood newFood = _foodStats.Foods.FirstOrDefault(x => x.Name == newName);
+
+            int allMealCount = _allMeals.meals.Count() -1;
+
+            for (int i = 0; i < allMealCount; i++)
+            {
+                IMeal meal = _allMeals.meals[i];
+
+                int itemCount = meal.Mealitems.Count() - 1;
+
+                for (int j = itemCount - 1; j > 0; j--)
+                {
+                    if (meal.Mealitems[j].FoodName == previousName)
+                    {
+                        decimal previousMeasure = _allMeals.meals[i].Mealitems[j].Measure;
+
+                        IMealItem newItem = new MealItem();
+
+                        if (newFood != null)
+                        {
+                            newItem.FoodName = newFood.Name;
+                       
+                        newItem.Measure = Convert.ToDecimal(previousMeasure);
+                        newItem.Protein = (newFood.Protein/newFood.Measure)*newItem.Measure;
+                        newItem.Carbs = (newFood.Carbs/newFood.Measure)*newItem.Measure;
+                        newItem.Fat = (newFood.Fat/newFood.Measure)*newItem.Measure;
+                        newItem.Calories = (newFood.Calories/newFood.Measure)*newItem.Measure;
+                        newItem.CalCalories = (newItem.Protein*4) + (newItem.Carbs*4) + (newItem.Fat*9);
+
+                        _allMeals.meals[i].Mealitems.RemoveAt(j);
+                        _allMeals.meals[i].Mealitems.Add(newItem);
+                        }
+                }
+                }
+            }
+
+            _allMeals.SaveChanged();
         }
 
     }

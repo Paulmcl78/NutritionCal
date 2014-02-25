@@ -15,7 +15,7 @@ namespace NutritionCal.GUI
         static void Main()
         {
 
-            CastleContainer.Instance.Install(new GUIWindsorInstaller(), new CommonWindsorInstaller());
+            CastleContainer.Instance.Install(new GuiWindsorInstaller(), new CommonWindsorInstaller());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

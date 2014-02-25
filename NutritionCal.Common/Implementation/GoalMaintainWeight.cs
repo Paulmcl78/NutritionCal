@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NutritionCal.Common.Abstraction;
+﻿using NutritionCal.Common.Abstraction;
 
 namespace NutritionCal.Common.Implementation
 {
@@ -19,5 +14,11 @@ namespace NutritionCal.Common.Implementation
         public double ProteinAmount { get; private set; }
         public double FatAmount { get; private set; }
         public double CarbAmount { get; private set; }
+
+
+        public string GetGoalType()
+        {
+            return Enumerations.GetEnumDescription(GoalTypeEnum.MaintainWeight);
+        }
     }
 }
