@@ -65,6 +65,7 @@
     <Compile Include="Implementation\GoalLoseWeightObese.cs" />
     <Compile Include="Implementation\GoalMaintainWeight.cs" />
     <Compile Include="Implementation\GoalTypeFactory.cs" />
+    <Compile Include="Implementation\IProfile.cs" />
     <Compile Include="Implementation\Meal.cs" />
     <Compile Include="Implementation\MealItem.cs" />
     <Compile Include="IOC\CastleContainer.cs" />

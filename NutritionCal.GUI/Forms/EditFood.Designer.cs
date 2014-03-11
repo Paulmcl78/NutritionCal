@@ -46,8 +46,8 @@
             this.txtFats = new System.Windows.Forms.TextBox();
             this.txtCarbs = new System.Windows.Forms.TextBox();
             this.txtCalories = new System.Windows.Forms.TextBox();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.btDelete = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.tlpFood.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +64,7 @@
             // txtSearch
             // 
             this.txtSearch.Location = new System.Drawing.Point(52, 10);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(140, 20);
             this.txtSearch.TabIndex = 1;
@@ -72,7 +72,7 @@
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(196, 9);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(56, 19);
             this.btnSearch.TabIndex = 2;
@@ -84,7 +84,7 @@
             // 
             this.lbResults.FormattingEnabled = true;
             this.lbResults.Location = new System.Drawing.Point(10, 42);
-            this.lbResults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lbResults.Margin = new System.Windows.Forms.Padding(2);
             this.lbResults.Name = "lbResults";
             this.lbResults.Size = new System.Drawing.Size(243, 56);
             this.lbResults.TabIndex = 3;
@@ -111,7 +111,7 @@
             this.tlpFood.Controls.Add(this.txtCalories, 1, 5);
             this.tlpFood.Controls.Add(this.btDelete, 0, 7);
             this.tlpFood.Location = new System.Drawing.Point(10, 114);
-            this.tlpFood.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tlpFood.Margin = new System.Windows.Forms.Padding(2);
             this.tlpFood.Name = "tlpFood";
             this.tlpFood.RowCount = 8;
             this.tlpFood.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -139,7 +139,7 @@
             // lblSave
             // 
             this.lblSave.Location = new System.Drawing.Point(104, 162);
-            this.lblSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lblSave.Margin = new System.Windows.Forms.Padding(2);
             this.lblSave.Name = "lblSave";
             this.lblSave.Size = new System.Drawing.Size(56, 19);
             this.lblSave.TabIndex = 1;
@@ -200,7 +200,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(104, 2);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(136, 20);
             this.txtName.TabIndex = 8;
@@ -208,7 +208,7 @@
             // txtMeasure
             // 
             this.txtMeasure.Location = new System.Drawing.Point(104, 26);
-            this.txtMeasure.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMeasure.Margin = new System.Windows.Forms.Padding(2);
             this.txtMeasure.Name = "txtMeasure";
             this.txtMeasure.Size = new System.Drawing.Size(76, 20);
             this.txtMeasure.TabIndex = 9;
@@ -216,7 +216,7 @@
             // txtProtein
             // 
             this.txtProtein.Location = new System.Drawing.Point(104, 50);
-            this.txtProtein.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtProtein.Margin = new System.Windows.Forms.Padding(2);
             this.txtProtein.Name = "txtProtein";
             this.txtProtein.Size = new System.Drawing.Size(76, 20);
             this.txtProtein.TabIndex = 10;
@@ -224,7 +224,7 @@
             // txtFats
             // 
             this.txtFats.Location = new System.Drawing.Point(104, 98);
-            this.txtFats.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFats.Margin = new System.Windows.Forms.Padding(2);
             this.txtFats.Name = "txtFats";
             this.txtFats.Size = new System.Drawing.Size(76, 20);
             this.txtFats.TabIndex = 12;
@@ -232,7 +232,7 @@
             // txtCarbs
             // 
             this.txtCarbs.Location = new System.Drawing.Point(104, 74);
-            this.txtCarbs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCarbs.Margin = new System.Windows.Forms.Padding(2);
             this.txtCarbs.Name = "txtCarbs";
             this.txtCarbs.Size = new System.Drawing.Size(76, 20);
             this.txtCarbs.TabIndex = 11;
@@ -240,22 +240,10 @@
             // txtCalories
             // 
             this.txtCalories.Location = new System.Drawing.Point(104, 122);
-            this.txtCalories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCalories.Margin = new System.Windows.Forms.Padding(2);
             this.txtCalories.Name = "txtCalories";
             this.txtCalories.Size = new System.Drawing.Size(76, 20);
             this.txtCalories.TabIndex = 13;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(257, 9);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(56, 19);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btDelete
             // 
@@ -266,6 +254,18 @@
             this.btDelete.Text = "Delete";
             this.btDelete.UseVisualStyleBackColor = true;
             this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(257, 9);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(56, 19);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // EditFood
             // 
@@ -281,8 +281,9 @@
             this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.btnCancel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "EditFood";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nutrition Cal - Edit food";
             this.Load += new System.EventHandler(this.EditFood_Load);
             this.tlpFood.ResumeLayout(false);

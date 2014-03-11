@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Xml.Linq;
 using NutritionCal.Common.Abstraction;
 
 namespace NutritionCal.Common.Implementation
 {
     public class BaseInformation : IBaseInformation
     {
+
+        private IGoalTypeFactory _goalTypeFactory;
+        private const string Filename = @"..\..\Resources\Profile.xml";
+
+
         public double Weight { get; set; }
         public double EnteredWeight { get; set; }
         public WeightUnits WeightUnits { get; set; }
@@ -17,6 +25,12 @@ namespace NutritionCal.Common.Implementation
         public double FatsPercentage { get; private set; }
         public IGoalType GoalType { get; private set; }
 
+
+        public BaseInformation(IGoalTypeFactory goalTypeFactory)
+        {
+            _goalTypeFactory = goalTypeFactory;
+        }
+
         public void Calculate(IGoalType goalType)
         {
             GoalType = goalType;
@@ -25,6 +39,62 @@ namespace NutritionCal.Common.Implementation
             Fats = CalulateFats(goalType);
             Calories = CalculateCalories();
             CalculatePercentages();
+        }
+
+        
+        public void SaveAndUpdate()
+        {
+            XElement profile = new XElement("Profile");
+
+            XElement xWeight = new XElement("Weight") { Value = Weight.ToString(CultureInfo.InvariantCulture) };
+            profile.Add(xWeight);
+            XElement xEnteredWeight = new XElement("EnteredWeight") { Value = EnteredWeight.ToString(CultureInfo.InvariantCulture) };
+            profile.Add(xEnteredWeight);
+            XElement xWeightUnits = new XElement("WeightUnits") { Value = WeightUnits.ToString() };
+            profile.Add(xWeightUnits);
+            XElement xGoalType = new XElement("GoalType") { Value = GoalType.GetGoalType().ToString(CultureInfo.InvariantCulture) };
+            profile.Add(xGoalType);
+
+            XDocument xDoc = new XDocument();
+            xDoc.Add(profile);
+            xDoc.Save(Filename);
+        }
+
+
+
+        public bool ProfileExists()
+        {
+
+            try
+            {
+                XDocument doc = XDocument.Load(Filename);
+
+                //Weight = from c in doc.Descendants("Profile")
+                //             let xWeight = c.Element("Weight")
+                //         where xWeight != null
+                //             let xEnteredWeight = c.Element("EnteredWeight")
+                //         where xEnteredWeight != null
+                //             let xWeightUnits = c.Element("WeightUnits")
+                //         where xWeightUnits != null
+                //             let xGoalType = c.Element("GoalType")
+                //         where xGoalType != null
+                //         select  
+                //             Weight = Convert.ToDouble(xWeight.Value)
+                //             //EnteredWeight = Convert.ToDouble(xEnteredWeight.Value),
+                //             //WeightUnits = (WeightUnits)Enum.Parse(typeof(WeightUnits),xWeightUnits.Value),
+                //            // GoalType = _goalTypeFactory.GetGoalType(Enumerations.GetEmumFromDescription<GoalTypeEnum>(xGoalType.Value))
+
+                //         ;
+
+            return true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return false;
         }
 
         #region Private Members

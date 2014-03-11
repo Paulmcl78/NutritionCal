@@ -1,1 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Profile>
+  <Weight>123</Weight>
+  <EnteredWeight>123</EnteredWeight>
+  <WeightUnits>Lb</WeightUnits>
+  <GoalType>Cutting more that 25% BF</GoalType>
+</Profile>

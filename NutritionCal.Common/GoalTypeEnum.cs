@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 
 namespace NutritionCal.Common
@@ -17,7 +20,6 @@ namespace NutritionCal.Common
 
         [Description("Maintaining")]
         MaintainWeight = 4
-
     }
 
     public static  class Enumerations
@@ -32,6 +34,22 @@ namespace NutritionCal.Common
                     false);
 
                 return attributes.Length > 0 ? attributes[0].Description : value.ToString();
+            }
+
+            public static T GetEmumFromDescription<T>(string enumDescription)
+            {
+                IEnumerable<T> enumValues = Enum.GetValues(typeof (T)).Cast<T>();
+
+                foreach (T enumValue in enumValues)
+                {
+                    if (GetEnumDescription(enumValue as Enum) == enumDescription)
+                    {
+                        return enumValue;
+                    }
+                }
+
+                throw new NotSupportedException("No enmu found matching description");
+
             }
     }
 }

@@ -129,6 +129,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
             this.Name = "AddFoodToMeal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddFoodToMeal";
             this.ResumeLayout(false);
             this.PerformLayout();

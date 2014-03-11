@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using NutritionCal.Common;
 using NutritionCal.Common.Abstraction;
@@ -10,12 +11,24 @@ namespace NutritionCal.GUI.Forms
     {
         private readonly IBaseInformation _baseInformation;
         private readonly IGoalTypeFactory _goalTypeFactory;
+        private GoalTypeEnum _goalType;
 
         public Form1(IBaseInformation baseInformation, IGoalTypeFactory goalTypeFactory)
         {
             InitializeComponent();
             _baseInformation = baseInformation;
+            ProfileExists();
             _goalTypeFactory = goalTypeFactory;
+        }
+
+        private void ProfileExists()
+        {
+            if (_baseInformation.ProfileExists())
+            {
+                FrmResults results = CastleContainer.Resolve<FrmResults>();
+                results.Show();
+                Hide();
+            }
         }
 
 
@@ -28,27 +41,19 @@ namespace NutritionCal.GUI.Forms
 
             _baseInformation.Weight = GetWeight(weight);
 
-            GoalTypeEnum goalType = GoalTypeEnum.MaintainWeight;
+            _baseInformation.Calculate(_goalTypeFactory.GetGoalType(_goalType));
 
-            if (rbGain.Checked)
-            {
-                goalType = GoalTypeEnum.GainWeight;
-            }
-            if (rbLose.Checked)
-            {
-                goalType = GoalTypeEnum.LoseWeight;
-            }
-            if (rbLose25.Checked)
-            {
-                goalType = GoalTypeEnum.LoseWeightObese;
-            }
-
-            _baseInformation.Calculate(_goalTypeFactory.GetGoalType(goalType));
-
+            UpdateProfile();
 
             FrmResults results = CastleContainer.Resolve<FrmResults>();
             results.Show();
             Hide();
+        }
+
+        private void UpdateProfile()
+        {
+            _baseInformation.SaveAndUpdate();
+          
         }
 
         public double GetWeight(double weight)
@@ -87,23 +92,34 @@ namespace NutritionCal.GUI.Forms
                 rb.Text = Enumerations.GetEnumDescription(value);
                 rb.AutoSize = true;
                 rb.CheckedChanged += RbOnCheckedChanged;
-                tableLayoutPanel1.Controls.Add(rb,0,counter);
+                tableLayoutPanel1.Controls.Add(rb,1,counter);
 
                 counter++;
             }
 
-            rbGain.Text = Enumerations.GetEnumDescription(GoalTypeEnum.GainWeight);
-            rbLose.Text = Enumerations.GetEnumDescription(GoalTypeEnum.LoseWeight);
-            rbLose25.Text = Enumerations.GetEnumDescription(GoalTypeEnum.LoseWeightObese);
-            rbMaintain.Text = Enumerations.GetEnumDescription(GoalTypeEnum.MaintainWeight);
+            tableLayoutPanel1.Controls.Add(lblWeight, 0, counter);
+            tableLayoutPanel1.Controls.Add(txtWeight, 1, counter);
+            tableLayoutPanel1.Controls.Add(cbWeight, 2, counter);
+            tableLayoutPanel1.Controls.Add(cmdSubmit, 1, counter + 1);
+
+            tableLayoutPanel1.Refresh();
+
+            this.Size = new Size(tableLayoutPanel1.Size.Width + 50 ,tableLayoutPanel1.Size.Height + 75);
+            
+
+            //rbGain.Text = Enumerations.GetEnumDescription(GoalTypeEnum.GainWeight);
+            //rbLose.Text = Enumerations.GetEnumDescription(GoalTypeEnum.LoseWeight);
+            //rbLose25.Text = Enumerations.GetEnumDescription(GoalTypeEnum.LoseWeightObese);
+            //rbMaintain.Text = Enumerations.GetEnumDescription(GoalTypeEnum.MaintainWeight);
 
         }
 
         private void RbOnCheckedChanged(object sender, EventArgs eventArgs)
         {
             if (((RadioButton)sender).Checked == false) return;
-           
-            MessageBox.Show(((RadioButton)sender).Text);
+
+            _goalType = Enumerations.GetEmumFromDescription<GoalTypeEnum>(((RadioButton)sender).Text);
+
         }
 
 

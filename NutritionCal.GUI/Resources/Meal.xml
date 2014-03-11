@@ -22,4 +22,15 @@
       <CalCalories>2.868</CalCalories>
     </MealItem>
   </Meal>
+  <Meal name="fgd">
+    <MealItem>
+      <FoodName>Alpro Almond Milk Original</FoodName>
+      <Measure>12</Measure>
+      <Protein>0.060</Protein>
+      <Carbs>0.36</Carbs>
+      <Fat>0.132</Fat>
+      <Calories>2.88</Calories>
+      <CalCalories>2.868</CalCalories>
+    </MealItem>
+  </Meal>
 </Meals>

@@ -14,6 +14,9 @@
         double FatsPercentage { get; }
         IGoalType GoalType { get; }
         void Calculate(IGoalType goalType);
+        void SaveAndUpdate();
+        bool ProfileExists();
+
 
     }
 }

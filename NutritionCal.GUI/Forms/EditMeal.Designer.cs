@@ -34,7 +34,6 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.lbResults = new System.Windows.Forms.ListBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.foodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.measureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.proteinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.carbsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,12 +42,12 @@
             this.calCaloriesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iMealItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pnlItems = new System.Windows.Forms.Panel();
+            this.btDelete = new System.Windows.Forms.Button();
             this.btnAddFood = new System.Windows.Forms.Button();
             this.btSave = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblMealName = new System.Windows.Forms.Label();
             this.btCancel = new System.Windows.Forms.Button();
-            this.btDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iMealItemBindingSource)).BeginInit();
             this.pnlItems.SuspendLayout();
@@ -99,7 +98,6 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.foodNameDataGridViewTextBoxColumn,
             this.measureDataGridViewTextBoxColumn,
             this.proteinDataGridViewTextBoxColumn,
             this.carbsDataGridViewTextBoxColumn,
@@ -113,13 +111,6 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(517, 164);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // foodNameDataGridViewTextBoxColumn
-            // 
-            this.foodNameDataGridViewTextBoxColumn.DataPropertyName = "foodName";
-            this.foodNameDataGridViewTextBoxColumn.HeaderText = "foodName";
-            this.foodNameDataGridViewTextBoxColumn.Name = "foodNameDataGridViewTextBoxColumn";
-            this.foodNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // measureDataGridViewTextBoxColumn
             // 
@@ -180,6 +171,16 @@
             this.pnlItems.TabIndex = 5;
             this.pnlItems.Visible = false;
             // 
+            // btDelete
+            // 
+            this.btDelete.Location = new System.Drawing.Point(91, 228);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(75, 23);
+            this.btDelete.TabIndex = 9;
+            this.btDelete.Text = "Delete";
+            this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
             // btnAddFood
             // 
             this.btnAddFood.Location = new System.Drawing.Point(311, 13);
@@ -226,16 +227,6 @@
             this.btCancel.UseVisualStyleBackColor = true;
             this.btCancel.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btDelete
-            // 
-            this.btDelete.Location = new System.Drawing.Point(91, 228);
-            this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(75, 23);
-            this.btDelete.TabIndex = 9;
-            this.btDelete.Text = "Delete";
-            this.btDelete.UseVisualStyleBackColor = true;
-            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
-            // 
             // EditMeal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -250,6 +241,7 @@
             this.Controls.Add(this.lblSearch);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "EditMeal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "EditMeal";
             this.Load += new System.EventHandler(this.EditMeal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

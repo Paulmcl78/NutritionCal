@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using Castle.DynamicProxy.Generators;
 using NutritionCal.Common.Abstraction;
 using NutritionCal.Common.IOC;
 using NutritionCal.Common.Implementation;
@@ -32,7 +33,10 @@ namespace NutritionCal.GUI.Forms
             BuildFullResults();
 
              Controls.Add(BuildStrip());
-             Refresh();
+             resize();
+
+
+
 
         }
 
@@ -53,8 +57,9 @@ namespace NutritionCal.GUI.Forms
                 BorderSides = ToolStripStatusLabelBorderSides.Right
             };
 
-            
+
             status.Items.Add(goal);
+
 
             return status;
         }
@@ -240,7 +245,7 @@ namespace NutritionCal.GUI.Forms
 
         private void addMealToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddMeal form = CastleContainer.Resolve<AddMeal>();
+            AddMeal form = CastleContainer.Resolve<AddMeal>(new { origin = this });
             form.Show();
         }
 
@@ -254,6 +259,35 @@ namespace NutritionCal.GUI.Forms
         void IUpdate.Update()
         {
             BuildFullResults();
+            resize();
+        }
+
+        private void resize()
+        {
+            int height = 0;
+            int width = 0;
+
+            dataGridView2.AutoSize = true;
+
+            for (int i = 0; i < dataGridView2.Columns.Count; i++)
+            {
+                dataGridView2.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
+
+            foreach (Control control in this.Controls)
+            {
+                height = height + control.Size.Height;
+                if (control.Size.Width > width && (control.GetType() != typeof(StatusStrip) && control.GetType() != menuStrip1.GetType()))
+                {
+                    width = control.Size.Width;
+                }
+
+            }
+
+            Size = new Size(width, height + 38);
+            Refresh();
+
         }
 
 
