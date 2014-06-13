@@ -68,28 +68,11 @@ namespace NutritionCal.Common.Implementation
             try
             {
                 XDocument doc = XDocument.Load(Filename);
-
-                //Weight = from c in doc.Descendants("Profile")
-                //         let xWeight = c.Element("Weight")
-                //         where xWeight != null
-                //         let xEnteredWeight = c.Element("EnteredWeight")
-                //         where xEnteredWeight != null
-                //         let xWeightUnits = c.Element("WeightUnits").
-                //         where xWeightUnits != null
-                //         let xGoalType = c.Element("GoalType")
-                //         where xGoalType != null
-                //         select
-                //             Weight = Convert.ToDouble(xWeight.Value)
-                //    //EnteredWeight = Convert.ToDouble(xEnteredWeight.Value),
-                //    //WeightUnits = (WeightUnits)Enum.Parse(typeof(WeightUnits),xWeightUnits.Value),
-                //    // GoalType = _goalTypeFactory.GetGoalType(Enumerations.GetEmumFromDescription<GoalTypeEnum>(xGoalType.Value))
-
-                //         ;
-
-              Weight = Convert.ToDouble(doc.Descendants("Profile").FirstOrDefault().Element("Weight").Value);
-              EnteredWeight = Convert.ToDouble(doc.Descendants("Profile").FirstOrDefault().Element("EnteredWeight").Value);
-              WeightUnits = (WeightUnits)Enum.Parse(typeof(WeightUnits), doc.Descendants("Profile").FirstOrDefault().Element("WeightUnits").Value);
-              GoalType = _goalTypeFactory.GetGoalType(Enumerations.GetEmumFromDescription<GoalTypeEnum>(doc.Descendants("Profile").FirstOrDefault().Element("GoalType").Value));
+                                
+                  Weight = Convert.ToDouble(doc.Descendants("Profile").FirstOrDefault().Element("Weight").Value);
+                  EnteredWeight = Convert.ToDouble(doc.Descendants("Profile").FirstOrDefault().Element("EnteredWeight").Value);
+                  WeightUnits = (WeightUnits)Enum.Parse(typeof(WeightUnits), doc.Descendants("Profile").FirstOrDefault().Element("WeightUnits").Value);
+                  Calculate( _goalTypeFactory.GetGoalType(Enumerations.GetEmumFromDescription<GoalTypeEnum>(doc.Descendants("Profile").FirstOrDefault().Element("GoalType").Value)));
                        
 
             return true;

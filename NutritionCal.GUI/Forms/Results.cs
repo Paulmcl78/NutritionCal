@@ -281,7 +281,7 @@ namespace NutritionCal.GUI.Forms
 
             }
 
-            Size = new Size(width, height + 38);
+            Size = new Size(width, height + 50);
             Refresh();
 
         }
