@@ -17,19 +17,25 @@ namespace NutritionCal.GUI.Forms
         {
             InitializeComponent();
             _baseInformation = baseInformation;
-            ProfileExists();
             _goalTypeFactory = goalTypeFactory;
         }
 
-        private void ProfileExists()
+
+
+        private bool ProfileExists()
         {
             if (_baseInformation.ProfileExists())
             {
                 FrmResults results = CastleContainer.Resolve<FrmResults>();
                 results.Show();
-                Hide();
+                this.Hide();
+                return true;
             }
+
+            return false;
         }
+
+
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -78,9 +84,15 @@ namespace NutritionCal.GUI.Forms
 
         }
 
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            if (ProfileExists()) return;
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+           
+
             cbWeight.DataSource = Enum.GetValues(typeof (WeightUnits));
 
             int counter = 2;

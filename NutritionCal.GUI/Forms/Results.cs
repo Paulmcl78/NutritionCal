@@ -34,10 +34,6 @@ namespace NutritionCal.GUI.Forms
 
              Controls.Add(BuildStrip());
              resize();
-
-
-
-
         }
 
         private StatusStrip BuildStrip()
