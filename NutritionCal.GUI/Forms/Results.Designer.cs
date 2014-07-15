@@ -57,7 +57,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(845, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(841, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -102,14 +102,14 @@
             // addFoodToolStripMenuItem
             // 
             this.addFoodToolStripMenuItem.Name = "addFoodToolStripMenuItem";
-            this.addFoodToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.addFoodToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addFoodToolStripMenuItem.Text = "Add Food";
             this.addFoodToolStripMenuItem.Click += new System.EventHandler(this.addFoodToolStripMenuItem_Click);
             // 
             // editFoodToolStripMenuItem
             // 
             this.editFoodToolStripMenuItem.Name = "editFoodToolStripMenuItem";
-            this.editFoodToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.editFoodToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editFoodToolStripMenuItem.Text = "Edit Food";
             this.editFoodToolStripMenuItem.Click += new System.EventHandler(this.editFoodToolStripMenuItem_Click);
             // 
@@ -125,14 +125,14 @@
             // addMealToolStripMenuItem
             // 
             this.addMealToolStripMenuItem.Name = "addMealToolStripMenuItem";
-            this.addMealToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.addMealToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addMealToolStripMenuItem.Text = "Add Meal";
             this.addMealToolStripMenuItem.Click += new System.EventHandler(this.addMealToolStripMenuItem_Click);
             // 
             // editMealToolStripMenuItem
             // 
             this.editMealToolStripMenuItem.Name = "editMealToolStripMenuItem";
-            this.editMealToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.editMealToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editMealToolStripMenuItem.Text = "Edit Meal";
             this.editMealToolStripMenuItem.Click += new System.EventHandler(this.editMealToolStripMenuItem_Click);
             // 
@@ -176,7 +176,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(845, 458);
+            this.ClientSize = new System.Drawing.Size(841, 454);
             this.ControlBox = false;
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.menuStrip1);

@@ -63,7 +63,7 @@ namespace NutritionCal.GUI.Forms
         public double GetWeight(double weight)
         {
             WeightUnits weightUnits;
-            Enum.TryParse(cbWeight.SelectedText, true, out weightUnits);
+            Enum.TryParse(cbWeight.SelectedItem.ToString(), true, out weightUnits);
 
             _baseInformation.EnteredWeight = weight;
             _baseInformation.WeightUnits = weightUnits;

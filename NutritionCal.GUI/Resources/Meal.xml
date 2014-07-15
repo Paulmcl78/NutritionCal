@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Meals>
-  <Meal name="Test">
+  <Meal name="test">
     <MealItem>
       <FoodName>Alpro Almond Milk Original</FoodName>
-      <Measure>12</Measure>
-      <Protein>0.65</Protein>
-      <Carbs>1.2</Carbs>
-      <Fat>1</Fat>
-      <Calories>45</Calories>
-      <CalCalories>65</CalCalories>
+      <Measure>100</Measure>
+      <Protein>0.500</Protein>
+      <Carbs>3.00</Carbs>
+      <Fat>1.100</Fat>
+      <Calories>24.00</Calories>
+      <CalCalories>23.900</CalCalories>
     </MealItem>
   </Meal>
-  <Meal name="hello">
+  <Meal name="tes4">
     <MealItem>
-      <FoodName>Alpro Almond Milk Original</FoodName>
+      <FoodName>Test</FoodName>
       <Measure>12</Measure>
       <Protein>0.060</Protein>
       <Carbs>0.36</Carbs>
@@ -22,15 +22,15 @@
       <CalCalories>2.868</CalCalories>
     </MealItem>
   </Meal>
-  <Meal name="fgd">
+  <Meal name="test3">
     <MealItem>
       <FoodName>Alpro Almond Milk Original</FoodName>
-      <Measure>12</Measure>
-      <Protein>0.060</Protein>
-      <Carbs>0.36</Carbs>
-      <Fat>0.132</Fat>
-      <Calories>2.88</Calories>
-      <CalCalories>2.868</CalCalories>
+      <Measure>10</Measure>
+      <Protein>0.050</Protein>
+      <Carbs>0.30</Carbs>
+      <Fat>0.110</Fat>
+      <Calories>2.40</Calories>
+      <CalCalories>2.390</CalCalories>
     </MealItem>
   </Meal>
 </Meals>

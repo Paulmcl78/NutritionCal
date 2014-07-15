@@ -17,6 +17,7 @@ namespace NutritionCal.GUI.Forms
         private readonly IBaseInformation _baseInformation;
         private readonly IAllMeals _allMeals;
         private DataTable _dataTable;
+        private TabControl tabWeek;
         private IEnumerable<IMealItem> _totalMeals;
         
         public FrmResults(IBaseInformation baseInformation, IAllMeals allMeals)
@@ -63,6 +64,15 @@ namespace NutritionCal.GUI.Forms
 
         private void BuildFullResults()
          {
+            this.Controls.Remove(tabWeek);
+             tabWeek = new TabControl {Dock = DockStyle.None};
+             
+             TabPage tabPageMonday = new TabPage("Monday");
+             TabPage tabPageTuesday = new TabPage("Tuesday");
+             tabPageMonday.Controls.Add(dataGridView2);
+             tabWeek.TabPages.Add(tabPageMonday);
+             tabWeek.TabPages.Add(tabPageTuesday);
+             Controls.Add(tabWeek);
              _dataTable = new DataTable("Results Table");
              BuildHeader();
              BuildMeals();
@@ -71,6 +81,8 @@ namespace NutritionCal.GUI.Forms
              BuildTraget();
              dataGridView2.DataSource = _dataTable;
              StyleTable();
+             tabWeek.Location = new Point(tabWeek.Location.X, tabWeek.Location.Y+25);
+             dataGridView2.Location = new Point(dataGridView2.Location.X, dataGridView2.Location.Y - 20);
          }
 
         private void BuildTotal()
@@ -265,11 +277,15 @@ namespace NutritionCal.GUI.Forms
 
             dataGridView2.AutoSize = true;
 
+
+
             for (int i = 0; i < dataGridView2.Columns.Count; i++)
             {
                 dataGridView2.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             }
 
+            tabWeek.Width = dataGridView2.Width;
+            tabWeek.Height = dataGridView2.Height;
 
             foreach (Control control in this.Controls)
             {
@@ -282,6 +298,7 @@ namespace NutritionCal.GUI.Forms
             }
 
             Size = new Size(width, height + 50);
+
             Refresh();
 
         }
